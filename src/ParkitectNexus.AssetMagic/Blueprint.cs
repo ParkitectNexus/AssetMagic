@@ -16,99 +16,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Runtime.Serialization.Formatters;
+using ParkitectNexus.AssetMagic.Utilities;
 
 namespace ParkitectNexus.AssetMagic
 {
-    public class FileHeader
-    {
-        protected dynamic Header { get; }
-
-        public FileHeader(JObject header)
-        {
-            if (header == null) throw new ArgumentNullException(nameof(header));
-            Header = header;
-        }
-
-        public DateTime Date
-        {
-            get { return new DateTime((long) Header["date"]); }
-            set { Header["date"] = value.Ticks; }
-        }
-    }
-
-    public class BlueprintHeader : FileHeader
-    {
-        public BlueprintHeader(JObject header) : base(header)
-        {
-        }
-        
-        public string Name
-        {
-            get { return Header["name"]; }
-            set { Header["name"] = value; }
-        }
-
-        public int GameVersion
-        {
-            get { return Header["gameVersion"]; }
-            set { Header["gameVersion"] = value; }
-        }
-
-        public int SavegameVersion
-        {
-            get { return Header["savegameVersion"]; }
-            set { Header["savegameVersion"] = value; }
-        }
-
-        public string GameVersionName
-        {
-            get { return Header["gameVersionName"]; }
-            set { Header["gameVersionName"] = value; }
-        }
-        
-        public string[] Types
-        {
-            get { return Header["types"].ToObject<string[]>(); }
-            set
-            {
-                Header["types"].RemoveAll();
-                Header["types"].Add(value);
-            }
-        }
-
-        public string Type
-        {
-            get { return Types.FirstOrDefault(); }
-            set { Types = new[] { value }; }
-        }
-    }
-
     public class Blueprint : IBlueprint
     {
-        private readonly dynamic[] _data;
-
-        public BlueprintHeader Header { get; }
-
         public Blueprint(byte version, string dataString)
         {
             if (dataString == null) throw new ArgumentNullException(nameof(dataString));
 
-            var data = dataString.Split('\r', '\n')
-                .Where(s => !string.IsNullOrWhiteSpace(s))
-                .Select(JsonConvert.DeserializeObject<dynamic>)
-                .ToArray();
-            
             Version = version;
-            _data = data;
-            Header = new BlueprintHeader(_data.FirstOrDefault(d => d["@type"] == "BlueprintHeader"));
+
+            var parser = new DataObjectParser(typeof (BlueprintHeader), typeof (Coaster));
+            Data = dataString.GetFilledLines().Select(parser.Parse).ToArray();
         }
 
         public byte Version { get; }
 
-        public IEnumerable<dynamic> Data => _data;
-         
+        public IEnumerable<DataObject> Data { get; }
+
+        public T GetElement<T>() where T : DataObject
+        {
+            return Data.OfType<T>().FirstOrDefault();
+        }
+
         #region Overrides of Object
 
         /// <summary>
@@ -119,11 +52,7 @@ namespace ParkitectNexus.AssetMagic
         /// </returns>
         public override string ToString()
         {
-            return string.Join("\r\n", _data.Select(d => JsonConvert.SerializeObject(d, new JsonSerializerSettings
-            {
-                ContractResolver = new MiniJsonContractResolver(),
-                Converters = new[] {new MiniJsonFloatConverter()}
-            }))) + "\r\n";
+            return string.Concat(Data.Select(d => d.ToString()));
         }
 
         #endregion
