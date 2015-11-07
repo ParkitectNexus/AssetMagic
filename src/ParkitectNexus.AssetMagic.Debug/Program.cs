@@ -15,7 +15,6 @@
 
 using System;
 using System.Drawing;
-using System.IO;
 
 namespace ParkitectNexus.AssetMagic.Debug
 {
@@ -28,18 +27,27 @@ namespace ParkitectNexus.AssetMagic.Debug
             string data;
             Blueprint blueprint;
 
-            using (var image = (Bitmap) Image.FromFile(@"..\..\..\..\tests\blueprints\loggers-revenge.png"))
+            using (var image = (Bitmap) Image.FromFile(@"..\..\..\..\tests\blueprints\fire-vortex-arrow.png"))
             {
                 data = extractor.ExtractData(image);
                 blueprint = extractor.Extract(image) as Blueprint;
             }
 
-            Console.WriteLine(blueprint.Name);
+            Console.WriteLine("Name: " + blueprint.Header.Name);
+            Console.WriteLine("Date: " + blueprint.Header.Date);
+            Console.WriteLine("GameVersion: " + blueprint.Header.GameVersion);
+            Console.WriteLine("GameVersionName: " + blueprint.Header.GameVersionName);
+            Console.WriteLine("SavegameVersion: " + blueprint.Header.SavegameVersion);
+            Console.WriteLine("Version: " + blueprint.Version);
+            Console.WriteLine("Type: " + blueprint.Header.Type);
             
-            File.WriteAllText(@"C:\Users\Tim\Desktop\1.txt", blueprint.ToString());
-            File.WriteAllText(@"C:\Users\Tim\Desktop\2.txt", data);
-            //Console.WriteLine(blueprint.ToString());
-            //Console.WriteLine(data);
+            blueprint.Header.Name = "Fire Vortex";
+            blueprint.Header.Date = blueprint.Header.Date;
+            blueprint.Header.GameVersion = 3;
+            blueprint.Header.GameVersionName = "Pre-Alpha 4a";
+            blueprint.Header.SavegameVersion = 8;
+            blueprint.Header.Type = "SteelCoaster";
+
             Console.WriteLine(blueprint.ToString()==data);
             Console.ReadLine();
         }

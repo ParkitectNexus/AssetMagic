@@ -14,37 +14,101 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ParkitectNexus.AssetMagic
 {
+    public class FileHeader
+    {
+        protected dynamic Header { get; }
+
+        public FileHeader(JObject header)
+        {
+            if (header == null) throw new ArgumentNullException(nameof(header));
+            Header = header;
+        }
+
+        public DateTime Date
+        {
+            get { return new DateTime((long) Header["date"]); }
+            set { Header["date"] = value.Ticks; }
+        }
+    }
+
+    public class BlueprintHeader : FileHeader
+    {
+        public BlueprintHeader(JObject header) : base(header)
+        {
+        }
+        
+        public string Name
+        {
+            get { return Header["name"]; }
+            set { Header["name"] = value; }
+        }
+
+        public int GameVersion
+        {
+            get { return Header["gameVersion"]; }
+            set { Header["gameVersion"] = value; }
+        }
+
+        public int SavegameVersion
+        {
+            get { return Header["savegameVersion"]; }
+            set { Header["savegameVersion"] = value; }
+        }
+
+        public string GameVersionName
+        {
+            get { return Header["gameVersionName"]; }
+            set { Header["gameVersionName"] = value; }
+        }
+        
+        public string[] Types
+        {
+            get { return Header["types"].ToObject<string[]>(); }
+            set
+            {
+                Header["types"].RemoveAll();
+                Header["types"].Add(value);
+            }
+        }
+
+        public string Type
+        {
+            get { return Types.FirstOrDefault(); }
+            set { Types = new[] { value }; }
+        }
+    }
+
     public class Blueprint : IBlueprint
     {
         private readonly dynamic[] _data;
 
-        private readonly dynamic _header;
-        private byte _version;
+        public BlueprintHeader Header { get; }
 
         public Blueprint(byte version, string dataString)
         {
             if (dataString == null) throw new ArgumentNullException(nameof(dataString));
 
-            var data = Enumerable.ToArray(dataString.Split('\r', '\n')
+            var data = dataString.Split('\r', '\n')
                 .Where(s => !string.IsNullOrWhiteSpace(s))
-                .Select(JsonConvert.DeserializeObject<dynamic>));
-
-            _version = version;
+                .Select(JsonConvert.DeserializeObject<dynamic>)
+                .ToArray();
+            
+            Version = version;
             _data = data;
-            _header = _data.FirstOrDefault(d => d["@type"] == "BlueprintHeader");
+            Header = new BlueprintHeader(_data.FirstOrDefault(d => d["@type"] == "BlueprintHeader"));
         }
 
-        public string Name
-        {
-            get { return _header["name"]; }
-            set { _header["name"] = value; }
-        }
+        public byte Version { get; }
 
+        public IEnumerable<dynamic> Data => _data;
+         
         #region Overrides of Object
 
         /// <summary>
