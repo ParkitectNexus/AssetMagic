@@ -46,20 +46,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blueprint.cs" />
-    <Compile Include="BlueprintExtractor.cs" />
-    <Compile Include="BlueprintHeader.cs" />
-    <Compile Include="Coaster.cs" />
-    <Compile Include="DataObject.cs" />
-    <Compile Include="DataObjectNameAttribute.cs" />
+    <Compile Include="JsonConverters\DictionaryConverter.cs" />
+    <Compile Include="Extractors\BlueprintExtractor.cs" />
+    <Compile Include="Elements\BlueprintHeader.cs" />
+    <Compile Include="Elements\Coaster.cs" />
+    <Compile Include="Elements\DataObject.cs" />
+    <Compile Include="Attributes\DataObjectNameAttribute.cs" />
     <Compile Include="DataObjectParser.cs" />
-    <Compile Include="FileHeader.cs" />
+    <Compile Include="Elements\FileHeader.cs" />
     <Compile Include="IBlueprint.cs" />
-    <Compile Include="IBlueprintExtractor.cs" />
+    <Compile Include="Extractors\IBlueprintExtractor.cs" />
     <Compile Include="InvalidBlueprintException.cs" />
-    <Compile Include="MiniJsonContractResolver.cs" />
-    <Compile Include="MiniJsonFloatConverter.cs" />
+    <Compile Include="JsonConverters\MiniJsonContractResolver.cs" />
+    <Compile Include="JsonConverters\MiniJsonFloatConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrackedRideStats.cs" />
+    <Compile Include="Elements\TrackedRideStats.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@
 
 using System.Drawing;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Extractors
 {
     public interface IBlueprintExtractor
     {

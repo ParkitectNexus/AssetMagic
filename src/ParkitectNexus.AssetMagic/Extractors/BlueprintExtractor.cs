@@ -21,9 +21,8 @@ using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Extractors
 {
     public class BlueprintExtractor : IBlueprintExtractor
     {
@@ -34,56 +33,6 @@ namespace ParkitectNexus.AssetMagic
         private const int OffsetData = 23;
 
         private static readonly byte[] Header = {0x53, 0x4D};
-
-        #region Implementation of IBlueprintExtractor
-
-        public IBlueprint Extract(Bitmap image)
-        {
-            byte version;
-            var data = ExtractData(image, out version);
-
-            return new Blueprint(version, data);
-        }
-
-        public string ExtractData(Bitmap image)
-        {
-            byte tmp;
-            return ExtractData(image, out tmp);
-        }
-
-        public string ExtractData(Bitmap image, out byte version)
-        {
-            if (image == null) throw new ArgumentNullException(nameof(image));
-
-            var data = ReadDataFromLeastSignificantBit(image).ToArray();
-
-            if (data.Length != (image.Width * image.Height) / 2 ||
-                !data.Skip(OffsetHeader).Take(Header.Length).SequenceEqual(Header))
-                throw new InvalidBlueprintException("invalid header");
-
-            version = data.ElementAt(OffsetVersion);
-            var length = BitConverter.ToInt32(data, OffsetLength);
-
-            if (length < 0 || length >= data.Length - OffsetData)
-                throw new InvalidBlueprintException("invalid length");
-            
-            var md5 = MD5.Create();
-            var checksum = md5.ComputeHash(data, OffsetData, length);
-
-            if (!checksum.SequenceEqual(data.Skip(OffsetChecksum).Take(16)))
-                throw new InvalidBlueprintException("data corrupted");
-
-            using (var memoryStream = new MemoryStream())
-            {
-                using (
-                    var gZipStream = new GZipStream(new MemoryStream(data, OffsetData, length, false),
-                        CompressionMode.Decompress))
-                    gZipStream.CopyTo(memoryStream);
-                return Encoding.UTF8.GetString(memoryStream.ToArray());
-            }
-        }
-
-        #endregion
 
         private static IEnumerable<byte> ReadDataFromLeastSignificantBit(Bitmap image)
         {
@@ -112,5 +61,55 @@ namespace ParkitectNexus.AssetMagic
                     swap = !swap;
                 }
         }
+
+        #region Implementation of IBlueprintExtractor
+
+        public IBlueprint Extract(Bitmap image)
+        {
+            byte version;
+            var data = ExtractData(image, out version);
+
+            return new Blueprint(version, data);
+        }
+
+        public string ExtractData(Bitmap image)
+        {
+            byte tmp;
+            return ExtractData(image, out tmp);
+        }
+
+        public string ExtractData(Bitmap image, out byte version)
+        {
+            if (image == null) throw new ArgumentNullException(nameof(image));
+
+            var data = ReadDataFromLeastSignificantBit(image).ToArray();
+
+            if (data.Length != (image.Width*image.Height)/2 ||
+                !data.Skip(OffsetHeader).Take(Header.Length).SequenceEqual(Header))
+                throw new InvalidBlueprintException("invalid header");
+
+            version = data.ElementAt(OffsetVersion);
+            var length = BitConverter.ToInt32(data, OffsetLength);
+
+            if (length < 0 || length >= data.Length - OffsetData)
+                throw new InvalidBlueprintException("invalid length");
+
+            var md5 = MD5.Create();
+            var checksum = md5.ComputeHash(data, OffsetData, length);
+
+            if (!checksum.SequenceEqual(data.Skip(OffsetChecksum).Take(16)))
+                throw new InvalidBlueprintException("data corrupted");
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (
+                    var gZipStream = new GZipStream(new MemoryStream(data, OffsetData, length, false),
+                        CompressionMode.Decompress))
+                    gZipStream.CopyTo(memoryStream);
+                return Encoding.UTF8.GetString(memoryStream.ToArray());
+            }
+        }
+
+        #endregion
     }
 }

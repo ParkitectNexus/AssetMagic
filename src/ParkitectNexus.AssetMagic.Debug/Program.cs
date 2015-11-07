@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Newtonsoft.Json;
+using ParkitectNexus.AssetMagic.Elements;
+using ParkitectNexus.AssetMagic.Extractors;
 
 namespace ParkitectNexus.AssetMagic.Debug
 {

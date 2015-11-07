@@ -16,7 +16,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
+using ParkitectNexus.AssetMagic.Elements;
 using ParkitectNexus.AssetMagic.Utilities;
 
 namespace ParkitectNexus.AssetMagic
