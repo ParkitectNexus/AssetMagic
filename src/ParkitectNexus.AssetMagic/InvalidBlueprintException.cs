@@ -13,14 +13,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Drawing;
+using System;
 
 namespace ParkitectNexus.AssetMagic
 {
-    public interface IBlueprintExtractor
+    public class InvalidBlueprintException : Exception
     {
-        IBlueprint Extract(Bitmap image);
-        string ExtractData(Bitmap image);
-        string ExtractData(Bitmap image, out byte version);
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="T:InvalidBlueprintException" /> class.
+        /// </summary>
+        public InvalidBlueprintException()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="T:InvalidBlueprintException" /> class with a specified error message.
+        /// </summary>
+        /// <param name="message">The message that describes the error. </param>
+        public InvalidBlueprintException(string message) : base(message)
+        {
+        }
     }
 }

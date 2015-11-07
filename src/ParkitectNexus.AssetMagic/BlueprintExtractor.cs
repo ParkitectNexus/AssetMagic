@@ -21,76 +21,93 @@ using System.IO.Compression;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace ParkitectNexus.AssetMagic
 {
     public class BlueprintExtractor : IBlueprintExtractor
     {
+        private const int OffsetHeader = 0;
+        private const int OffsetVersion = 2;
+        private const int OffsetLength = 3;
+        private const int OffsetChecksum = 7;
+        private const int OffsetData = 23;
+
+        private static readonly byte[] Header = {0x53, 0x4D};
+
         #region Implementation of IBlueprintExtractor
 
         public IBlueprint Extract(Bitmap image)
         {
+            byte version;
+            var data = ExtractData(image, out version);
+
+            return new Blueprint(version, data);
+        }
+
+        public string ExtractData(Bitmap image)
+        {
+            byte tmp;
+            return ExtractData(image, out tmp);
+        }
+
+        public string ExtractData(Bitmap image, out byte version)
+        {
             if (image == null) throw new ArgumentNullException(nameof(image));
-            if (image.Width != 512 || image.Height != 512)
-                throw new Exception("invalid image");
 
-            var data = ReadBytesUnsafeFromBlueprint(image).ToArray();
+            var data = ReadDataFromLeastSignificantBit(image).ToArray();
 
-            if (data.Length != (512*512)/2 || data[0] != 0x53 || data[1] != 0x4D)
-                throw new Exception("invalid image");
+            if (data.Length != (image.Width * image.Height) / 2 ||
+                !data.Skip(OffsetHeader).Take(Header.Length).SequenceEqual(Header))
+                throw new InvalidBlueprintException("invalid header");
 
-            var ver = data[2];
-            var len = BitConverter.ToInt32(data, 3);
+            version = data.ElementAt(OffsetVersion);
+            var length = BitConverter.ToInt32(data, OffsetLength);
 
-            if (len < 0 || len >= data.Length - 23)
-                throw new Exception("invalid image");
-
-            if (ver != 1)
-                throw new Exception("unsupported version");
-
+            if (length < 0 || length >= data.Length - OffsetData)
+                throw new InvalidBlueprintException("invalid length");
+            
             var md5 = MD5.Create();
-            var hash = md5.ComputeHash(data, 23, len);
+            var checksum = md5.ComputeHash(data, OffsetData, length);
 
-            if (!hash.SequenceEqual(data.Skip(7).Take(16)))
-                throw new Exception("invalid image");
+            if (!checksum.SequenceEqual(data.Skip(OffsetChecksum).Take(16)))
+                throw new InvalidBlueprintException("data corrupted");
 
             using (var memoryStream = new MemoryStream())
             {
                 using (
-                    var gZipStream = new GZipStream(new MemoryStream(data, 23, len, false), CompressionMode.Decompress))
-                {
+                    var gZipStream = new GZipStream(new MemoryStream(data, OffsetData, length, false),
+                        CompressionMode.Decompress))
                     gZipStream.CopyTo(memoryStream);
-                }
-                var str = Encoding.UTF8.GetString(memoryStream.ToArray());
-                return new Blueprint(ver, str);
+                return Encoding.UTF8.GetString(memoryStream.ToArray());
             }
         }
 
         #endregion
 
-        private static IEnumerable<byte> ReadBytesUnsafeFromBlueprint(Bitmap blueprint)
+        private static IEnumerable<byte> ReadDataFromLeastSignificantBit(Bitmap image)
         {
-            if (blueprint == null) throw new ArgumentNullException(nameof(blueprint));
-            if (blueprint.Width != 512 || blueprint.Height != 512)
-                throw new ArgumentException("invalid image", nameof(blueprint));
+            if (image == null) throw new ArgumentNullException(nameof(image));
 
             var swap = false;
-            byte keep = 0;
-            for (var y = 0; y < blueprint.Height; y++)
-                for (var x = 0; x < blueprint.Width; x++)
+            byte memory = 0;
+
+            for (var y = 0; y < image.Height; y++)
+                for (var x = 0; x < image.Width; x++)
                 {
-                    var pixel = blueprint.GetPixel(x, y);
+                    var pixel = image.GetPixel(x, y);
+
                     var r = pixel.R & 1;
                     var g = pixel.G & 1;
                     var b = pixel.B & 1;
                     var a = pixel.A & 1;
 
-                    var part = (byte) ((a << 3) | (b << 2) | (g << 1) | r);
+                    var nibble = (byte) ((a << 3) | (b << 2) | (g << 1) | r);
 
                     if (swap)
-                        yield return (byte) ((part << 4) | keep);
+                        yield return (byte) ((nibble << 4) | memory);
                     else
-                        keep = part;
+                        memory = nibble;
 
                     swap = !swap;
                 }

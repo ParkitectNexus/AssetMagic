@@ -13,17 +13,55 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.Linq;
+using Newtonsoft.Json;
+
 namespace ParkitectNexus.AssetMagic
 {
     public class Blueprint : IBlueprint
     {
-        private string str;
-        private byte ver;
+        private readonly dynamic[] _data;
 
-        public Blueprint(byte ver, string str)
+        private readonly dynamic _header;
+        private byte _version;
+
+        public Blueprint(byte version, string dataString)
         {
-            this.ver = ver;
-            this.str = str;
+            if (dataString == null) throw new ArgumentNullException(nameof(dataString));
+
+            var data = Enumerable.ToArray(dataString.Split('\r', '\n')
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(JsonConvert.DeserializeObject<dynamic>));
+
+            _version = version;
+            _data = data;
+            _header = _data.FirstOrDefault(d => d["@type"] == "BlueprintHeader");
         }
+
+        public string Name
+        {
+            get { return _header["name"]; }
+            set { _header["name"] = value; }
+        }
+
+        #region Overrides of Object
+
+        /// <summary>
+        ///     Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        ///     A string that represents the current object.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Join("\r\n", _data.Select(d => JsonConvert.SerializeObject(d, new JsonSerializerSettings
+            {
+                ContractResolver = new MiniJsonContractResolver(),
+                Converters = new[] {new MiniJsonFloatConverter()}
+            }))) + "\r\n";
+        }
+
+        #endregion
     }
 }
