@@ -38,30 +38,14 @@ namespace ParkitectNexus.AssetMagic.Debug
                 blueprint = extractor.Extract(image) as Blueprint;
             }
             
-//            Console.WriteLine("Name: " + blueprint.Header.Name);
-//            Console.WriteLine("Date: " + blueprint.Header.Date);
-//            Console.WriteLine("GameVersion: " + blueprint.Header.GameVersion);
-//            Console.WriteLine("GameVersionName: " + blueprint.Header.GameVersionName);
-//            Console.WriteLine("SavegameVersion: " + blueprint.Header.SavegameVersion);
-//            Console.WriteLine("Version: " + blueprint.Version);
-//            Console.WriteLine("Type: " + blueprint.Header.Type);
-//            
-//            blueprint.Header.Name = "Fire Vortex";
-//            blueprint.Header.Date = blueprint.Header.Date;
-//            blueprint.Header.GameVersion = 3;
-//            blueprint.Header.GameVersionName = "Pre-Alpha 4a";
-//            blueprint.Header.SavegameVersion = 8;
-//            blueprint.Header.Type = "SteelCoaster";
+            Console.WriteLine("drops: " + blueprint.Coaster.Statistics.Drops);
+            Console.WriteLine("drops: " + blueprint.Coaster.Statistics.Drops);
 
-            var header = blueprint.GetElement<BlueprintHeader>();
-            var coaster = blueprint.GetElement<Coaster>();
-            Console.WriteLine("drops: " + coaster.Statistics.Drops);
-            coaster.Statistics.Drops = 100;
-            Console.WriteLine("drops: " + coaster.Statistics.Drops);
-            coaster.Position = coaster.Position;
-            Console.WriteLine(coaster.Position);
-            Console.WriteLine(header);
-            Console.WriteLine(coaster);
+            blueprint.Coaster.Position = blueprint.Coaster.Position;
+            Console.WriteLine(blueprint.Coaster.Position);
+
+            Console.WriteLine(blueprint.Header);
+            Console.WriteLine(blueprint.Coaster);
 
             Console.WriteLine("Data unchanged: " +(data == blueprint.ToString()));
             

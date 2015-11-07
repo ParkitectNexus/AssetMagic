@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public class TrackedRideStats : DataObject
+    public class TrackedRideStats : DataObject, ITrackedRideStats
     {
         public TrackedRideStats()
         {

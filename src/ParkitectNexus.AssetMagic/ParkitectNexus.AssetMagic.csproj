@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blueprint.cs" />
+    <Compile Include="Elements\IBlueprintHeader.cs" />
+    <Compile Include="Elements\ICoaster.cs" />
+    <Compile Include="Elements\IDataObject.cs" />
+    <Compile Include="Elements\IFileHeader.cs" />
+    <Compile Include="Elements\ITrackedRideStats.cs" />
+    <Compile Include="Inserters\IBlueprintInserter.cs" />
     <Compile Include="JsonConverters\DictionaryConverter.cs" />
     <Compile Include="Extractors\BlueprintExtractor.cs" />
     <Compile Include="Elements\BlueprintHeader.cs" />

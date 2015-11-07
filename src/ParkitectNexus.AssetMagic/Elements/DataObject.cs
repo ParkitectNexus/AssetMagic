@@ -22,7 +22,7 @@ using ParkitectNexus.AssetMagic.JsonConverters;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public class DataObject
+    public class DataObject : IDataObject
     {
         private readonly IDictionary<string, object> _data;
 
@@ -92,18 +92,6 @@ namespace ParkitectNexus.AssetMagic.Elements
             }
 
             return (T) Convert.ChangeType(obj, typeof (T));
-        }
-
-        public DataObject GetObject(string key)
-        {
-            var obj = this[key];
-
-            if (obj is IDictionary<string, object>)
-            {
-                return new DataObject((obj as IDictionary<string, object>));
-            }
-
-            return null;
         }
 
         public T[] GetArray<T>(string key)

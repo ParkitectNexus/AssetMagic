@@ -16,7 +16,7 @@
 namespace ParkitectNexus.AssetMagic.Elements
 {
     [DataObjectName("(.*Coaster|.*Railway)")]
-    public class Coaster : DataObject
+    public class Coaster : DataObject, ICoaster
     {
         public int Id
         {
@@ -66,7 +66,7 @@ namespace ParkitectNexus.AssetMagic.Elements
             set { Set("duration", value); }
         }
 
-        public TrackedRideStats Statistics
+        public ITrackedRideStats Statistics
         {
             get { return Get<TrackedRideStats>("stats"); }
             set { Set("stats", value); }

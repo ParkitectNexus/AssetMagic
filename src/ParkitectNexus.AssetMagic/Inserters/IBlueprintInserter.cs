@@ -1,4 +1,4 @@
-// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetMagic
 // Copyright 2015 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
-namespace ParkitectNexus.AssetMagic.Elements
+namespace ParkitectNexus.AssetMagic.Inserters
 {
-    public class FileHeader : DataObject, IFileHeader
+    public interface IBlueprintInserter
     {
-        public DateTime Date
-        {
-            get { return new DateTime((long) this["date"]); }
-            set { this["date"] = value.Ticks; }
-        }
+        //
     }
 }

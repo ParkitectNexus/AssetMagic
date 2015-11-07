@@ -13,16 +13,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public class FileHeader : DataObject, IFileHeader
+    public interface ICoaster : IDataObject
     {
-        public DateTime Date
-        {
-            get { return new DateTime((long) this["date"]); }
-            set { this["date"] = value.Ticks; }
-        }
+        int Id { get; set; }
+        float[] Position { get; set; }
+        float[] Rotation { get; set; }
+        float[] CarColors { get; set; }
+        float[] TrackColors { get; set; }
+        int TrackId { get; set; }
+        float EntranceFee { get; set; }
+        float Duration { get; set; }
+        ITrackedRideStats Statistics { get; set; }
+        int TrainCount { get; set; }
+        int TrainLength { get; set; }
+        string CarType { get; set; }
+        int WaitTime { get; set; }
+        object StationControllers { get; set; }
     }
 }

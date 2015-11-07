@@ -31,13 +31,19 @@ namespace ParkitectNexus.AssetMagic
 
             var parser = new DataObjectParser(typeof (BlueprintHeader), typeof (Coaster));
             Data = dataString.GetFilledLines().Select(parser.Parse).ToArray();
+
+            Header = GetElement<IBlueprintHeader>();
+            Coaster = GetElement<ICoaster>();
         }
 
         public byte Version { get; }
 
         public IEnumerable<DataObject> Data { get; }
 
-        public T GetElement<T>() where T : DataObject
+        public IBlueprintHeader Header { get; }
+        public ICoaster Coaster { get; }
+
+        public T GetElement<T>() where T : IDataObject
         {
             return Data.OfType<T>().FirstOrDefault();
         }

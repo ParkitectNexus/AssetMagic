@@ -13,16 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public class FileHeader : DataObject, IFileHeader
+    public interface IBlueprintHeader : IFileHeader
     {
-        public DateTime Date
-        {
-            get { return new DateTime((long) this["date"]); }
-            set { this["date"] = value.Ticks; }
-        }
+        string Name { get; set; }
+        int GameVersion { get; set; }
+        int SavegameVersion { get; set; }
+        string GameVersionName { get; set; }
+        string[] ContentTypes { get; set; }
+        string ContentType { get; set; }
     }
 }

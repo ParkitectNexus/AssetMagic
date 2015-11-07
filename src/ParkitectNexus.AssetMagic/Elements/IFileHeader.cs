@@ -17,12 +17,8 @@ using System;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public class FileHeader : DataObject, IFileHeader
+    public interface IFileHeader : IDataObject
     {
-        public DateTime Date
-        {
-            get { return new DateTime((long) this["date"]); }
-            set { this["date"] = value.Ticks; }
-        }
+        DateTime Date { get; set; }
     }
 }

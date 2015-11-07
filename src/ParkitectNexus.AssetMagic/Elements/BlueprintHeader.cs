@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public class BlueprintHeader : FileHeader
+    public class BlueprintHeader : FileHeader, IBlueprintHeader
     {
         public string Name
         {

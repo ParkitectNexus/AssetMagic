@@ -13,9 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+using ParkitectNexus.AssetMagic.Elements;
+
 namespace ParkitectNexus.AssetMagic
 {
     public interface IBlueprint
     {
+        byte Version { get; }
+        IEnumerable<DataObject> Data { get; }
+        IBlueprintHeader Header { get; }
+        ICoaster Coaster { get; }
+        T GetElement<T>() where T : IDataObject;
     }
 }

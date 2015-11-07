@@ -13,16 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
+using System.Collections.Generic;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public class FileHeader : DataObject, IFileHeader
+    public interface IDataObject
     {
-        public DateTime Date
-        {
-            get { return new DateTime((long) this["date"]); }
-            set { this["date"] = value.Ticks; }
-        }
+        object this[string key] { get; set; }
+        bool IsEmpty { get; }
+        string Type { get; set; }
+        void Add(string key, object value);
+        void Add(KeyValuePair<string, object> keyValuePair);
+        void AddRange(IEnumerable<KeyValuePair<string, object>> keyValuePairs);
+        T Get<T>(string key);
+        T[] GetArray<T>(string key);
+        void Set(string key, object value);
     }
 }
