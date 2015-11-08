@@ -15,7 +15,7 @@
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public interface ITrackedRideStats
+    public interface ITrackedRideStats : IDataObject
     {
         float MinVertG { get; set; }
         float MaxVertG { get; set; }

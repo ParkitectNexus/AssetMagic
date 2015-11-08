@@ -19,28 +19,12 @@ namespace ParkitectNexus.AssetMagic.Elements
 {
     public class BlueprintHeader : FileHeader, IBlueprintHeader
     {
+        #region Implementation of IBlueprintHeader
+
         public string Name
         {
             get { return Get<string>("name"); }
             set { Set("name", value); }
-        }
-
-        public int GameVersion
-        {
-            get { return Get<int>("gameVersion"); }
-            set { Set("gameVersion", value); }
-        }
-
-        public int SavegameVersion
-        {
-            get { return Get<int>("savegameVersion"); }
-            set { Set("savegameVersion", value); }
-        }
-
-        public string GameVersionName
-        {
-            get { return Get<string>("gameVersionName"); }
-            set { Set("gameVersionName", value); }
         }
 
         public string[] ContentTypes
@@ -54,5 +38,7 @@ namespace ParkitectNexus.AssetMagic.Elements
             get { return ContentTypes.FirstOrDefault(); }
             set { ContentTypes = new[] {value}; }
         }
+
+        #endregion
     }
 }

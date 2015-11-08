@@ -18,9 +18,6 @@ namespace ParkitectNexus.AssetMagic.Elements
     public interface IBlueprintHeader : IFileHeader
     {
         string Name { get; set; }
-        int GameVersion { get; set; }
-        int SavegameVersion { get; set; }
-        string GameVersionName { get; set; }
         string[] ContentTypes { get; set; }
         string ContentType { get; set; }
     }

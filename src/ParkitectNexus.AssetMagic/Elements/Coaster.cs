@@ -18,6 +18,8 @@ namespace ParkitectNexus.AssetMagic.Elements
     [DataObjectName("(.*Coaster|.*Railway)")]
     public class Coaster : DataObject, ICoaster
     {
+        #region Implementation of ICoaster
+
         public int Id
         {
             get { return Get<int>("@id"); }
@@ -103,5 +105,7 @@ namespace ParkitectNexus.AssetMagic.Elements
         }
 
         //"stationControllers":[{"@type":"TrackedRideStationController","@id":"3","attraction":"1","entrance":"4","exit":"5"}]}
+
+        #endregion
     }
 }

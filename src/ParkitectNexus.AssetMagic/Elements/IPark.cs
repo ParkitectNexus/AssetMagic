@@ -1,4 +1,4 @@
-// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetMagic
 // Copyright 2015 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,15 +13,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    public interface IFileHeader : IDataObject
+    public interface IPark : IDataObject
     {
-        DateTime Date { get; set; }
-        int GameVersion { get; set; }
-        int SavegameVersion { get; set; }
-        string GameVersionName { get; set; }
+        int Id { get; set; }
+        IParkInfo ParkInfo { get; set; }
+        IParkSettings Settings { get; set; }
+        string ParkName { get; set; }
+        string Guid { get; set; }
+        int SpawnedAtTime { get; set; }
+        int XSize { get; set; }
+        int ZSize { get; set; }
+        int YSize { get; set; }
+        object JobAgency { get; set; }
+        object Zones { get; set; }
+        bool SendGuestsHome { get; set; }
+        string Patches { get; set; }
+        object EmployeeColors { get; set; }
     }
 }

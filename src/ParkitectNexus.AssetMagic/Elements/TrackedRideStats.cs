@@ -27,6 +27,8 @@ namespace ParkitectNexus.AssetMagic.Elements
         {
         }
 
+        #region Implementation of ITrackedRideStats
+
         public float MinVertG
         {
             get { return Get<float>("minVertG"); }
@@ -164,5 +166,7 @@ namespace ParkitectNexus.AssetMagic.Elements
             get { return Get<int>("headChoppers"); }
             set { Set("headChoppers", value); }
         }
+
+        #endregion
     }
 }

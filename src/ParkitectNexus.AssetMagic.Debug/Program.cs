@@ -14,11 +14,8 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using Newtonsoft.Json;
-using ParkitectNexus.AssetMagic.Elements;
+using System.IO;
 using ParkitectNexus.AssetMagic.Extractors;
 
 namespace ParkitectNexus.AssetMagic.Debug
@@ -27,28 +24,23 @@ namespace ParkitectNexus.AssetMagic.Debug
     {
         private static void Main(string[] args)
         {
-            var extractor = new BlueprintExtractor();
+            var blueprintExtractor = new BlueprintExtractor();
+            var savegameExtractor = new SavegameExtractor();
 
-            string data;
             Blueprint blueprint;
-
             using (var image = (Bitmap) Image.FromFile(@"..\..\..\..\tests\blueprints\fire-vortex-arrow.png"))
-            {
-                data = extractor.ExtractData(image);
-                blueprint = extractor.Extract(image) as Blueprint;
-            }
-            
-            Console.WriteLine("drops: " + blueprint.Coaster.Statistics.Drops);
-            Console.WriteLine("drops: " + blueprint.Coaster.Statistics.Drops);
+                blueprint = blueprintExtractor.Extract(image) as Blueprint;
 
-            blueprint.Coaster.Position = blueprint.Coaster.Position;
-            Console.WriteLine(blueprint.Coaster.Position);
+            var savegame =
+                savegameExtractor.Extract(File.ReadAllText(@"..\..\..\..\tests\parks\unnamed-park.txt"));
 
-            Console.WriteLine(blueprint.Header);
-            Console.WriteLine(blueprint.Coaster);
+            Console.WriteLine("BLUEPRINT:");
+            Console.WriteLine("Name: " + blueprint.Header.Name);
 
-            Console.WriteLine("Data unchanged: " +(data == blueprint.ToString()));
-            
+            Console.WriteLine("SAVEGAME:");
+            Console.WriteLine("Name: " + savegame.Header.Name);
+            Console.WriteLine("GuestCount: " + savegame.GuestCount);
+
             Console.ReadLine();
         }
     }

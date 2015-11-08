@@ -46,12 +46,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blueprint.cs" />
+    <Compile Include="Elements\Guest.cs" />
     <Compile Include="Elements\IBlueprintHeader.cs" />
     <Compile Include="Elements\ICoaster.cs" />
     <Compile Include="Elements\IDataObject.cs" />
     <Compile Include="Elements\IFileHeader.cs" />
+    <Compile Include="Elements\IGuest.cs" />
+    <Compile Include="Elements\IPark.cs" />
+    <Compile Include="Elements\IParkInfo.cs" />
+    <Compile Include="Elements\IParkSettings.cs" />
+    <Compile Include="Elements\ISavegameHeader.cs" />
     <Compile Include="Elements\ITrackedRideStats.cs" />
+    <Compile Include="Elements\Park.cs" />
+    <Compile Include="Elements\ParkInfo.cs" />
+    <Compile Include="Elements\ParkSettings.cs" />
+    <Compile Include="Elements\SavegameHeader.cs" />
+    <Compile Include="Extractors\ISavegameExtractor.cs" />
+    <Compile Include="Extractors\SavegameExtractor.cs" />
+    <Compile Include="SaveFile.cs" />
+    <Compile Include="ISaveFile.cs" />
     <Compile Include="Inserters\IBlueprintInserter.cs" />
+    <Compile Include="ISavegame.cs" />
     <Compile Include="JsonConverters\DictionaryConverter.cs" />
     <Compile Include="Extractors\BlueprintExtractor.cs" />
     <Compile Include="Elements\BlueprintHeader.cs" />
@@ -67,6 +82,7 @@
     <Compile Include="JsonConverters\MiniJsonFloatConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\TrackedRideStats.cs" />
+    <Compile Include="Savegame.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
   </ItemGroup>
   <ItemGroup>

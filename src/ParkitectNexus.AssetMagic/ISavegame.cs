@@ -17,10 +17,10 @@ using ParkitectNexus.AssetMagic.Elements;
 
 namespace ParkitectNexus.AssetMagic
 {
-    public interface IBlueprint : ISaveFile
+    public interface ISavegame : ISaveFile
     {
-        byte Version { get; }
-        IBlueprintHeader Header { get; }
-        ICoaster Coaster { get; }
+        ISavegameHeader Header { get; }
+        IPark Park { get; }
+        int GuestCount { get; }
     }
 }

@@ -20,28 +20,25 @@ using ParkitectNexus.AssetMagic.Utilities;
 
 namespace ParkitectNexus.AssetMagic
 {
-    public class Blueprint : SaveFile, IBlueprint
+    public class Savegame : SaveFile, ISavegame
     {
-        public Blueprint(byte version, string dataString)
+        public Savegame(string dataString)
         {
             if (dataString == null) throw new ArgumentNullException(nameof(dataString));
 
-            Version = version;
-
-            var parser = new DataObjectParser(typeof (BlueprintHeader), typeof (Coaster));
+            var parser = new DataObjectParser(typeof (SavegameHeader), typeof (Park), typeof (Guest));
             Data = dataString.GetFilledLines().Select(parser.Parse).ToArray();
 
-            Header = GetElement<BlueprintHeader>();
-            Coaster = GetElement<Coaster>();
+            Header = GetElement<SavegameHeader>();
+            Park = GetElement<Park>();
         }
 
-        #region Implementation of IBlueprint
+        #region Implementation of ISavegame
 
-        public byte Version { get; }
+        public ISavegameHeader Header { get; }
 
-        public IBlueprintHeader Header { get; }
-
-        public ICoaster Coaster { get; }
+        public IPark Park { get; }
+        public int GuestCount => GetElements<IGuest>().Count();
 
         #endregion
     }

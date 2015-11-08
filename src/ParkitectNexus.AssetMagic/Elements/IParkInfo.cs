@@ -1,4 +1,4 @@
-// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetMagic
 // Copyright 2015 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +13,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using ParkitectNexus.AssetMagic.Elements;
-
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Elements
 {
-    public interface IBlueprint : ISaveFile
+    public interface IParkInfo : IDataObject
     {
-        byte Version { get; }
-        IBlueprintHeader Header { get; }
-        ICoaster Coaster { get; }
+        float Money { get; set; }
+        int GuestsLeftCount { get; set; }
+        float ParkEntranceFee { get; set; }
+        float RatingPriceSatisfaction { get; set; }
+        float RatingCleanliness { get; set; }
+        float RatingHappiness { get; set; }
+        string Transactions { get; set; }
     }
 }

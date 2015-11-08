@@ -13,14 +13,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using ParkitectNexus.AssetMagic.Elements;
+using System;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Extractors
 {
-    public interface IBlueprint : ISaveFile
+    public class SavegameExtractor : ISavegameExtractor
     {
-        byte Version { get; }
-        IBlueprintHeader Header { get; }
-        ICoaster Coaster { get; }
+        #region Implementation of ISavegameExtractor
+
+        public ISavegame Extract(string data)
+        {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+
+            return new Savegame(data);
+        }
+
+        #endregion
     }
 }

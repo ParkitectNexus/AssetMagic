@@ -68,8 +68,8 @@ namespace ParkitectNexus.AssetMagic
             }
 
             var instance = Activator.CreateInstance(type) as DataObject;
-            instance.AddRange(data);
 
+            instance?.AddRange(data);
             return instance;
         }
     }

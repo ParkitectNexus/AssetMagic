@@ -1,4 +1,4 @@
-// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetMagic
 // Copyright 2015 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,14 +13,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using ParkitectNexus.AssetMagic.Elements;
-
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Elements
 {
-    public interface IBlueprint : ISaveFile
+    public class ParkSettings : DataObject, IParkSettings
     {
-        byte Version { get; }
-        IBlueprintHeader Header { get; }
-        ICoaster Coaster { get; }
+        #region Implementation of IParkSettings
+
+        public bool ResourcesEnabled
+        {
+            get { return Get<bool>("resourcesEnabled"); }
+            set { Set("resourcesEnabled", value); }
+        }
+
+        #endregion
     }
 }
