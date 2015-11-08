@@ -36,9 +36,9 @@ namespace ParkitectNexus.AssetMagic.Readers
             var parser = new DataObjectParser(typeof (BlueprintHeader), typeof (Coaster));
             var blueprint = new Blueprint(data.GetFilledLines().Select(parser.Parse).ToArray());
 
-            if(blueprint.Header == null)
+            if (blueprint.Header == null)
                 throw new InvalidBlueprintException("BlueprintHeader is missing");
-            if(blueprint.Coaster == null)
+            if (blueprint.Coaster == null)
                 throw new InvalidBlueprintException("missing or unsupported coaster type");
 
             return blueprint;

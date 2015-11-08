@@ -15,7 +15,6 @@
 
 using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using ParkitectNexus.AssetMagic.Readers;
 using ParkitectNexus.AssetMagic.Writers;
@@ -36,12 +35,12 @@ namespace ParkitectNexus.AssetMagic.Debug
 
             var savegame =
                 savegameReader.Deserialize(File.ReadAllText(@"..\..\..\..\tests\parks\unnamed-park.txt"));
-            
+
             var bmp = new Bitmap(512, 512);
             blueprintWriter.Write(blueprint, bmp);
-            
+
             var blueprint2 = blueprintReader.Read(bmp);
-            
+
             Console.WriteLine("BLUEPRINT:");
             Console.WriteLine("Name: " + blueprint.Header.Name);
 
@@ -51,15 +50,8 @@ namespace ParkitectNexus.AssetMagic.Debug
             Console.WriteLine("SAVEGAME:");
             Console.WriteLine("Name: " + savegame.Header.Name);
             Console.WriteLine("GuestCount: " + savegame.GuestCount);
-            
+
             Console.ReadLine();
         }
-
-        struct A
-        {
-            public int X { get; }
-            public int Y { get; }
-        }
-
     }
 }

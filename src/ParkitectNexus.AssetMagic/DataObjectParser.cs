@@ -60,7 +60,8 @@ namespace ParkitectNexus.AssetMagic
                                         _knownTypes.FirstOrDefault(t =>
                                         {
                                             var attr = t.GetCustomAttribute<DataObjectNameAttribute>();
-                                            return attr != null && Regex.IsMatch(typeName, "^" + attr.RegularExpression + "$");
+                                            return attr != null &&
+                                                   Regex.IsMatch(typeName, "^" + attr.RegularExpression + "$");
                                         });
 
                     if (availableType != null && typeof (DataObject).IsAssignableFrom(availableType))
