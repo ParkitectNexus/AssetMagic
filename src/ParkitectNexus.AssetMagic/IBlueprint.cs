@@ -19,7 +19,6 @@ namespace ParkitectNexus.AssetMagic
 {
     public interface IBlueprint : ISaveFile
     {
-        byte Version { get; }
         IBlueprintHeader Header { get; }
         ICoaster Coaster { get; }
     }

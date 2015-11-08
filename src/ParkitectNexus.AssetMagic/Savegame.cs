@@ -22,12 +22,11 @@ namespace ParkitectNexus.AssetMagic
 {
     public class Savegame : SaveFile, ISavegame
     {
-        public Savegame(string dataString)
+        public Savegame(DataObject[] data)
         {
-            if (dataString == null) throw new ArgumentNullException(nameof(dataString));
+            if (data == null) throw new ArgumentNullException(nameof(data));
 
-            var parser = new DataObjectParser(typeof (SavegameHeader), typeof (Park), typeof (Guest));
-            Data = dataString.GetFilledLines().Select(parser.Parse).ToArray();
+            Data = data;
 
             Header = GetElement<SavegameHeader>();
             Park = GetElement<Park>();

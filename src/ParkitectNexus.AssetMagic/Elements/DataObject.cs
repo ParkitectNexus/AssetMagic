@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -49,6 +50,8 @@ namespace ParkitectNexus.AssetMagic.Elements
             }
             set { _data[key] = value; }
         }
+
+        public IReadOnlyDictionary<string, object> Data => new ReadOnlyDictionary<string, object>(_data);
 
         public bool IsEmpty => !_data.Any();
 
@@ -112,24 +115,5 @@ namespace ParkitectNexus.AssetMagic.Elements
             if (key == null) throw new ArgumentNullException(nameof(key));
             _data[key] = value;
         }
-
-        #region Overrides of Object
-
-        /// <summary>
-        ///     Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>
-        ///     A string that represents the current object.
-        /// </returns>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(_data, new JsonSerializerSettings
-            {
-                ContractResolver = new MiniJsonContractResolver(),
-                Converters = new[] {new MiniJsonFloatConverter()}
-            }) + "\r\n";
-        }
-
-        #endregion
     }
 }

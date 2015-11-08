@@ -1,4 +1,4 @@
-// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetMagic
 // Copyright 2015 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,10 +13,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace ParkitectNexus.AssetMagic.Extractors
+using System.Drawing;
+using System.IO;
+
+namespace ParkitectNexus.AssetMagic.Writers
 {
-    public interface ISavegameExtractor
+    public interface IBlueprintWriter
     {
-        ISavegame Extract(string data);
+        string Serialize(IBlueprint blueprint);
+        void Serialize(IBlueprint blueprint, Stream destinationStream);
+        void Write(IBlueprint blueprint, Bitmap destinationImage);
+        void WriteData(string data, Bitmap destinationBitmap);
     }
 }

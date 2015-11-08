@@ -61,14 +61,16 @@
     <Compile Include="Elements\ParkInfo.cs" />
     <Compile Include="Elements\ParkSettings.cs" />
     <Compile Include="Elements\SavegameHeader.cs" />
-    <Compile Include="Extractors\ISavegameExtractor.cs" />
-    <Compile Include="Extractors\SavegameExtractor.cs" />
+    <Compile Include="Streams\BitmapDataStream.cs" />
+    <Compile Include="Readers\ISavegameReader.cs" />
+    <Compile Include="Readers\SavegameReader.cs" />
     <Compile Include="SaveFile.cs" />
     <Compile Include="ISaveFile.cs" />
-    <Compile Include="Inserters\IBlueprintInserter.cs" />
+    <Compile Include="Writers\BlueprintWriter.cs" />
+    <Compile Include="Writers\IBlueprintWriter.cs" />
     <Compile Include="ISavegame.cs" />
     <Compile Include="JsonConverters\DictionaryConverter.cs" />
-    <Compile Include="Extractors\BlueprintExtractor.cs" />
+    <Compile Include="Readers\BlueprintReader.cs" />
     <Compile Include="Elements\BlueprintHeader.cs" />
     <Compile Include="Elements\Coaster.cs" />
     <Compile Include="Elements\DataObject.cs" />
@@ -76,7 +78,7 @@
     <Compile Include="DataObjectParser.cs" />
     <Compile Include="Elements\FileHeader.cs" />
     <Compile Include="IBlueprint.cs" />
-    <Compile Include="Extractors\IBlueprintExtractor.cs" />
+    <Compile Include="Readers\IBlueprintReader.cs" />
     <Compile Include="InvalidBlueprintException.cs" />
     <Compile Include="JsonConverters\MiniJsonContractResolver.cs" />
     <Compile Include="JsonConverters\MiniJsonFloatConverter.cs" />
@@ -84,6 +86,8 @@
     <Compile Include="Elements\TrackedRideStats.cs" />
     <Compile Include="Savegame.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
+    <Compile Include="Writers\ISavegameWriter.cs" />
+    <Compile Include="Writers\SavegameWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

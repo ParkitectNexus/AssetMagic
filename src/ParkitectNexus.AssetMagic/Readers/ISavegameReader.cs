@@ -13,14 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Drawing;
+using System.IO;
 
-namespace ParkitectNexus.AssetMagic.Extractors
+namespace ParkitectNexus.AssetMagic.Readers
 {
-    public interface IBlueprintExtractor
+    public interface ISavegameReader
     {
-        IBlueprint Extract(Bitmap image);
-        string ExtractData(Bitmap image);
-        string ExtractData(Bitmap image, out byte version);
+        ISavegame Deserialize(string data);
+        ISavegame Deserialize(Stream stream);
     }
 }

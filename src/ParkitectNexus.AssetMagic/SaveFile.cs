@@ -29,22 +29,7 @@ namespace ParkitectNexus.AssetMagic
         {
             Data = data;
         }
-
-        #region Overrides of Object
-
-        /// <summary>
-        ///     Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>
-        ///     A string that represents the current object.
-        /// </returns>
-        public override string ToString()
-        {
-            return string.Concat(Data.Select(d => d.ToString()));
-        }
-
-        #endregion
-
+        
         #region Implementation of ISaveFile
 
         public IEnumerable<DataObject> Data { get; protected set; }

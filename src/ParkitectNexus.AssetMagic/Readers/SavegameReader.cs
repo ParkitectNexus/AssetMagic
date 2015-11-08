@@ -14,28 +14,34 @@
 // limitations under the License.
 
 using System;
+using System.IO;
 using System.Linq;
 using ParkitectNexus.AssetMagic.Elements;
+using ParkitectNexus.AssetMagic.Utilities;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Readers
 {
-    public class Blueprint : SaveFile, IBlueprint
+    public class SavegameReader : ISavegameReader
     {
-        public Blueprint(DataObject[] data)
+        #region Implementation of ISavegameReader
+
+        public ISavegame Deserialize(string data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
-            
-            Data = data;
 
-            Header = GetElement<BlueprintHeader>();
-            Coaster = GetElement<Coaster>();
+            var parser = new DataObjectParser(typeof (SavegameHeader), typeof (Park), typeof (Guest));
+            return new Savegame(data.GetFilledLines().Select(parser.Parse).ToArray());
         }
 
-        #region Implementation of IBlueprint
-        
-        public IBlueprintHeader Header { get; }
+        public ISavegame Deserialize(Stream stream)
+        {
+            if (stream == null) throw new ArgumentNullException(nameof(stream));
 
-        public ICoaster Coaster { get; }
+            using (var streamReader = new StreamReader(stream))
+            {
+                return Deserialize(streamReader.ReadToEnd());
+            }
+        }
 
         #endregion
     }

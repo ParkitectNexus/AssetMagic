@@ -15,8 +15,10 @@
 
 using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
-using ParkitectNexus.AssetMagic.Extractors;
+using ParkitectNexus.AssetMagic.Readers;
+using ParkitectNexus.AssetMagic.Writers;
 
 namespace ParkitectNexus.AssetMagic.Debug
 {
@@ -24,18 +26,29 @@ namespace ParkitectNexus.AssetMagic.Debug
     {
         private static void Main(string[] args)
         {
-            var blueprintExtractor = new BlueprintExtractor();
-            var savegameExtractor = new SavegameExtractor();
+            var blueprintReader = new BlueprintReader();
+            var savegameReader = new SavegameReader();
+            var blueprintWriter = new BlueprintWriter();
 
-            Blueprint blueprint;
+            IBlueprint blueprint;
             using (var image = (Bitmap) Image.FromFile(@"..\..\..\..\tests\blueprints\fire-vortex-arrow.png"))
-                blueprint = blueprintExtractor.Extract(image) as Blueprint;
+                blueprint = blueprintReader.Read(image);
 
             var savegame =
-                savegameExtractor.Extract(File.ReadAllText(@"..\..\..\..\tests\parks\unnamed-park.txt"));
+                savegameReader.Deserialize(File.ReadAllText(@"..\..\..\..\tests\parks\unnamed-park.txt"));
+
+            var bmp = new Bitmap(512, 512);
+            blueprintWriter.Write(blueprint, bmp);
+
+            bmp.Save("C:/Users/Tim/Desktop/bmp.png", ImageFormat.Png);
+            var blueprint2 = blueprintReader.Read(bmp);
+
 
             Console.WriteLine("BLUEPRINT:");
             Console.WriteLine("Name: " + blueprint.Header.Name);
+
+            Console.WriteLine("BLUEPRINT2:");
+            Console.WriteLine("Name: " + blueprint2.Header.Name);
 
             Console.WriteLine("SAVEGAME:");
             Console.WriteLine("Name: " + savegame.Header.Name);
