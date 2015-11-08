@@ -51,8 +51,15 @@ namespace ParkitectNexus.AssetMagic.Debug
             Console.WriteLine("SAVEGAME:");
             Console.WriteLine("Name: " + savegame.Header.Name);
             Console.WriteLine("GuestCount: " + savegame.GuestCount);
-
+            
             Console.ReadLine();
         }
+
+        struct A
+        {
+            public int X { get; }
+            public int Y { get; }
+        }
+
     }
 }

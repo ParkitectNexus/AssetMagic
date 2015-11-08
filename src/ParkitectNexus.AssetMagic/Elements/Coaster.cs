@@ -17,7 +17,7 @@ using ParkitectNexus.AssetMagic.Attributes;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
-    [DataObjectName("(.*Coaster|.*Railway)")]
+    [DataObjectName("(.*Coaster|WildMouse|MiniatureRailway|SuspendedMonorail|LogFlume)")]
     public class Coaster : DataObject, ICoaster
     {
         #region Implementation of ICoaster

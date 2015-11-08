@@ -61,6 +61,7 @@
     <Compile Include="Elements\ParkInfo.cs" />
     <Compile Include="Elements\ParkSettings.cs" />
     <Compile Include="Elements\SavegameHeader.cs" />
+    <Compile Include="InvalidSavegameException.cs" />
     <Compile Include="Streams\BitmapDataStream.cs" />
     <Compile Include="Readers\ISavegameReader.cs" />
     <Compile Include="Readers\SavegameReader.cs" />

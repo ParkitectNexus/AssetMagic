@@ -19,37 +19,37 @@ using System.Runtime.Serialization;
 namespace ParkitectNexus.AssetMagic
 {
     /// <summary>
-    ///     Represents errors occuring during reading of blueprints.
+    ///     Represents errors occuring during reading of savegames.
     /// </summary>
     [Serializable]
-    public class InvalidBlueprintException : Exception
+    public class InvalidSavegameException : Exception
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="InvalidBlueprintException" /> class.
+        ///     Initializes a new instance of the <see cref="InvalidSavegameException" /> class.
         /// </summary>
-        public InvalidBlueprintException()
+        public InvalidSavegameException()
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="InvalidBlueprintException" /> class.
+        ///     Initializes a new instance of the <see cref="InvalidSavegameException" /> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public InvalidBlueprintException(string message) : base(message)
+        public InvalidSavegameException(string message) : base(message)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="InvalidBlueprintException" /> class.
+        ///     Initializes a new instance of the <see cref="InvalidSavegameException" /> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public InvalidBlueprintException(string message, Exception inner) : base(message, inner)
+        public InvalidSavegameException(string message, Exception inner) : base(message, inner)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="InvalidBlueprintException" /> class.
+        ///     Initializes a new instance of the <see cref="InvalidSavegameException" /> class.
         /// </summary>
         /// <param name="info">
         ///     The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object
@@ -59,7 +59,9 @@ namespace ParkitectNexus.AssetMagic
         ///     The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual
         ///     information about the source or destination.
         /// </param>
-        protected InvalidBlueprintException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected InvalidSavegameException(
+            SerializationInfo info,
+            StreamingContext context) : base(info, context)
         {
         }
     }

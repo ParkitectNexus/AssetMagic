@@ -30,7 +30,14 @@ namespace ParkitectNexus.AssetMagic.Readers
             if (data == null) throw new ArgumentNullException(nameof(data));
 
             var parser = new DataObjectParser(typeof (SavegameHeader), typeof (Park), typeof (Guest));
-            return new Savegame(data.GetFilledLines().Select(parser.Parse).ToArray());
+            var savegame = new Savegame(data.GetFilledLines().Select(parser.Parse).ToArray());
+
+            if(savegame.Header == null)
+                throw new InvalidSavegameException("SavegameHeader is missing");
+            if(savegame.Park == null)
+                throw new InvalidSavegameException("Park is missing");
+
+            return savegame;
         }
 
         public virtual ISavegame Deserialize(Stream stream)
