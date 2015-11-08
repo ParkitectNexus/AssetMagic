@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/ParkitectNexus/AssetMagic/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/ParkitectNexus/AssetMagic</projectUrl>
+    <iconUrl>https://parkitectnexus.com/img/logo-square.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>-</releaseNotes>
+    <copyright>Copyright ParkitectNexus, Tim Potze 2015</copyright>
+    <tags>Parkitect Nexus ParkitectNexus Extract Data Savegame Blueprint</tags>
+  </metadata>
+</package>
