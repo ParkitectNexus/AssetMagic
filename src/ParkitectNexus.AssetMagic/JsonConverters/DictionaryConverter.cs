@@ -22,6 +22,8 @@ namespace ParkitectNexus.AssetMagic.JsonConverters
 {
     public class DictionaryConverter : CustomCreationConverter<IDictionary<string, object>>
     {
+        #region Overrides of CustomCreationConverter<IDictionary<string, object>>
+
         public override IDictionary<string, object> Create(Type objectType)
         {
             return new Dictionary<string, object>();
@@ -46,5 +48,7 @@ namespace ParkitectNexus.AssetMagic.JsonConverters
             // then fall back on standard deserializer (strings, numbers etc.)
             return serializer.Deserialize(reader);
         }
+
+        #endregion
     }
 }

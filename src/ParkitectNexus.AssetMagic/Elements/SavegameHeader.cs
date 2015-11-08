@@ -19,43 +19,43 @@ namespace ParkitectNexus.AssetMagic.Elements
     {
         #region Implementation of ISavegameHeader
 
-        public int ParkDate
+        public virtual int ParkDate
         {
             get { return Get<int>("parkDate"); }
             set { Set("parkDate", value); }
         }
 
-        public float Money
+        public virtual float Money
         {
             get { return Get<float>("money"); }
             set { Set("money", value); }
         }
 
-        public int GuestCount
+        public virtual int GuestCount
         {
             get { return Get<int>("guestCount"); }
             set { Set("guestCount", value); }
         }
 
-        public float ParkRating
+        public virtual float ParkRating
         {
             get { return Get<float>("parkRating"); }
             set { Set("parkRating", value); }
         }
 
-        public float TimePlayed
+        public virtual float TimePlayed
         {
             get { return Get<float>("timePlayed"); }
             set { Set("timePlayed", value); }
         }
 
-        public string Name
+        public virtual string Name
         {
             get { return Get<string>("name"); }
             set { Set("name", value); }
         }
 
-        public string Screenshot
+        public virtual string Screenshot
         {
             get { return Get<string>("screenshot"); }
             set { Set("screenshot", value); }

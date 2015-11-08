@@ -19,7 +19,7 @@ namespace ParkitectNexus.AssetMagic.Elements
     {
         #region Implementation of IParkSettings
 
-        public bool ResourcesEnabled
+        public virtual bool ResourcesEnabled
         {
             get { return Get<bool>("resourcesEnabled"); }
             set { Set("resourcesEnabled", value); }

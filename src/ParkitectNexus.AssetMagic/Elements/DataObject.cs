@@ -17,9 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ParkitectNexus.AssetMagic.JsonConverters;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
@@ -41,7 +39,9 @@ namespace ParkitectNexus.AssetMagic.Elements
             _data = data;
         }
 
-        public object this[string key]
+        public virtual IReadOnlyDictionary<string, object> Data => new ReadOnlyDictionary<string, object>(_data);
+
+        public virtual object this[string key]
         {
             get
             {
@@ -51,9 +51,7 @@ namespace ParkitectNexus.AssetMagic.Elements
             set { _data[key] = value; }
         }
 
-        public IReadOnlyDictionary<string, object> Data => new ReadOnlyDictionary<string, object>(_data);
-
-        public bool IsEmpty => !_data.Any();
+        public virtual bool IsEmpty => !_data.Any();
 
         public virtual string Type
         {
@@ -82,7 +80,7 @@ namespace ParkitectNexus.AssetMagic.Elements
                 Add(keyValuePair);
         }
 
-        public T Get<T>(string key)
+        public virtual T Get<T>(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
             var obj = this[key];
@@ -97,7 +95,7 @@ namespace ParkitectNexus.AssetMagic.Elements
             return (T) Convert.ChangeType(obj, typeof (T));
         }
 
-        public T[] GetArray<T>(string key)
+        public virtual T[] GetArray<T>(string key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
             var obj = this[key];
@@ -110,7 +108,7 @@ namespace ParkitectNexus.AssetMagic.Elements
             return array?.Values<T>().ToArray();
         }
 
-        public void Set(string key, object value)
+        public virtual void Set(string key, object value)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
             _data[key] = value;

@@ -15,7 +15,7 @@
 
 using System;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class DataObjectNameAttribute : Attribute

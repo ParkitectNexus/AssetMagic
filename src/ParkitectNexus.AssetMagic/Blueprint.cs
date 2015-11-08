@@ -14,7 +14,6 @@
 // limitations under the License.
 
 using System;
-using System.Linq;
 using ParkitectNexus.AssetMagic.Elements;
 
 namespace ParkitectNexus.AssetMagic
@@ -24,7 +23,7 @@ namespace ParkitectNexus.AssetMagic
         public Blueprint(DataObject[] data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
-            
+
             Data = data;
 
             Header = GetElement<BlueprintHeader>();
@@ -32,10 +31,10 @@ namespace ParkitectNexus.AssetMagic
         }
 
         #region Implementation of IBlueprint
-        
-        public IBlueprintHeader Header { get; }
 
-        public ICoaster Coaster { get; }
+        public virtual IBlueprintHeader Header { get; }
+
+        public virtual ICoaster Coaster { get; }
 
         #endregion
     }

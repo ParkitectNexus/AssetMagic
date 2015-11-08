@@ -25,7 +25,7 @@ namespace ParkitectNexus.AssetMagic.Readers
     {
         #region Implementation of ISavegameReader
 
-        public ISavegame Deserialize(string data)
+        public virtual ISavegame Deserialize(string data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
 
@@ -33,7 +33,7 @@ namespace ParkitectNexus.AssetMagic.Readers
             return new Savegame(data.GetFilledLines().Select(parser.Parse).ToArray());
         }
 
-        public ISavegame Deserialize(Stream stream)
+        public virtual ISavegame Deserialize(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
 

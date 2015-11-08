@@ -21,25 +21,25 @@ namespace ParkitectNexus.AssetMagic.Elements
     {
         #region Implementation of IFileHeader
 
-        public DateTime Date
+        public virtual DateTime Date
         {
             get { return new DateTime((long) this["date"]); }
             set { this["date"] = value.Ticks; }
         }
 
-        public int SavegameVersion
+        public virtual int SavegameVersion
         {
             get { return Get<int>("savegameVersion"); }
             set { Set("savegameVersion", value); }
         }
 
-        public int GameVersion
+        public virtual int GameVersion
         {
             get { return Get<int>("gameVersion"); }
             set { Set("gameVersion", value); }
         }
 
-        public string GameVersionName
+        public virtual string GameVersionName
         {
             get { return Get<string>("gameVersionName"); }
             set { Set("gameVersionName", value); }

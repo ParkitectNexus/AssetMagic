@@ -29,17 +29,17 @@ namespace ParkitectNexus.AssetMagic
         {
             Data = data;
         }
-        
+
         #region Implementation of ISaveFile
 
-        public IEnumerable<DataObject> Data { get; protected set; }
+        public virtual IEnumerable<DataObject> Data { get; protected set; }
 
-        public T GetElement<T>() where T : IDataObject
+        public virtual T GetElement<T>() where T : IDataObject
         {
             return GetElements<T>().FirstOrDefault();
         }
 
-        public IEnumerable<T> GetElements<T>() where T : IDataObject
+        public virtual IEnumerable<T> GetElements<T>() where T : IDataObject
         {
             return Data.OfType<T>();
         }

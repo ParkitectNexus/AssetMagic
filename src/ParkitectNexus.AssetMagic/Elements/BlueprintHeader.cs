@@ -21,19 +21,19 @@ namespace ParkitectNexus.AssetMagic.Elements
     {
         #region Implementation of IBlueprintHeader
 
-        public string Name
+        public virtual string Name
         {
             get { return Get<string>("name"); }
             set { Set("name", value); }
         }
 
-        public string[] ContentTypes
+        public virtual string[] ContentTypes
         {
             get { return Get<string[]>("types"); }
             set { Set("types", value); }
         }
 
-        public string ContentType
+        public virtual string ContentType
         {
             get { return ContentTypes.FirstOrDefault(); }
             set { ContentTypes = new[] {value}; }

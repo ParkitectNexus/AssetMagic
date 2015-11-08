@@ -19,85 +19,85 @@ namespace ParkitectNexus.AssetMagic.Elements
     {
         #region Implementation of IPark
 
-        public int Id
+        public virtual int Id
         {
             get { return Get<int>("@id"); }
             set { Set("@id", value); }
         }
 
-        public IParkInfo ParkInfo
+        public virtual IParkInfo ParkInfo
         {
             get { return Get<ParkInfo>("parkInfo"); }
             set { Set("parkInfo", value); }
         }
 
-        public IParkSettings Settings
+        public virtual IParkSettings Settings
         {
             get { return Get<ParkSettings>("settings"); }
             set { Set("settings", value); }
         }
 
-        public string ParkName
+        public virtual string ParkName
         {
             get { return Get<string>("parkName"); }
             set { Set("parkName", value); }
         }
 
-        public string Guid
+        public virtual string Guid
         {
             get { return Get<string>("guid"); }
             set { Set("guid", value); }
         }
 
-        public int SpawnedAtTime
+        public virtual int SpawnedAtTime
         {
             get { return Get<int>("spawnedAtTime"); }
             set { Set("spawnedAtTime", value); }
         }
 
-        public int XSize
+        public virtual int XSize
         {
             get { return Get<int>("xSize"); }
             set { Set("xSize", value); }
         }
 
-        public int ZSize
+        public virtual int ZSize
         {
             get { return Get<int>("zSize"); }
             set { Set("zSize", value); }
         }
 
-        public int YSize
+        public virtual int YSize
         {
             get { return Get<int>("ySize"); }
             set { Set("ySize", value); }
         }
 
-        public object JobAgency
+        public virtual object JobAgency
         {
             get { return Get<object>("jobAgency"); }
             set { Set("jobAgency", value); }
         }
 
-        public object Zones
+        public virtual object Zones
         {
             get { return Get<object>("zones"); }
             set { Set("zones", value); }
         }
 
-        public bool SendGuestsHome
+        public virtual bool SendGuestsHome
         {
             get { return Get<bool>("sendGuestsHome"); }
             set { Set("sendGuestsHome", value); }
         }
 
-        public string Patches
+        public virtual string Patches
         {
             get { return Get<string>("patches"); }
             set { Set("patches", value); }
         }
 
-        public object EmployeeColors
+        public virtual object EmployeeColors
         {
             get { return Get<object>("employeeColors"); }
             set { Set("employeeColors", value); }

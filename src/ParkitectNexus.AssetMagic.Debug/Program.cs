@@ -36,14 +36,12 @@ namespace ParkitectNexus.AssetMagic.Debug
 
             var savegame =
                 savegameReader.Deserialize(File.ReadAllText(@"..\..\..\..\tests\parks\unnamed-park.txt"));
-
+            
             var bmp = new Bitmap(512, 512);
             blueprintWriter.Write(blueprint, bmp);
-
-            bmp.Save("C:/Users/Tim/Desktop/bmp.png", ImageFormat.Png);
+            
             var blueprint2 = blueprintReader.Read(bmp);
-
-
+            
             Console.WriteLine("BLUEPRINT:");
             Console.WriteLine("Name: " + blueprint.Header.Name);
 

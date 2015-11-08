@@ -19,6 +19,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using ParkitectNexus.AssetMagic.Attributes;
 using ParkitectNexus.AssetMagic.Elements;
 using ParkitectNexus.AssetMagic.JsonConverters;
 
@@ -42,7 +43,7 @@ namespace ParkitectNexus.AssetMagic
             _knownTypes = knownTypes;
         }
 
-        public DataObject Parse(string input)
+        public virtual DataObject Parse(string input)
         {
             if (input == null) throw new ArgumentNullException(nameof(input));
 

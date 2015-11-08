@@ -98,8 +98,6 @@ namespace ParkitectNexus.AssetMagic.Streams
             WriteBytes(OffsetData, _buffer, 0, _length);
         }
 
-        #region Reading from Image
-
         private byte ReadNibble(Color pixel)
         {
             return (byte) (
@@ -129,10 +127,6 @@ namespace ParkitectNexus.AssetMagic.Streams
                 }
         }
 
-        #endregion
-
-        #region Writing to Image
-
         private void WriteNibble(ref Color color, byte nibble)
         {
             color = Color.FromArgb(
@@ -156,12 +150,12 @@ namespace ParkitectNexus.AssetMagic.Streams
 
             if (ry >= _bitmap.Height)
                 throw new IOException("Out of range of image");
-            
+
             var lPixel = _bitmap.GetPixel(lx, ly);
             var rPixel = _bitmap.GetPixel(rx, ry);
 
-            WriteNibble(ref lPixel, (byte)(value & 15));
-            WriteNibble(ref rPixel, (byte)(value >> 4));
+            WriteNibble(ref lPixel, (byte) (value & 15));
+            WriteNibble(ref rPixel, (byte) (value >> 4));
 
             _bitmap.SetPixel(lx, ly, lPixel);
             _bitmap.SetPixel(rx, ry, rPixel);
@@ -173,20 +167,22 @@ namespace ParkitectNexus.AssetMagic.Streams
                 WriteByte(startIndex + i, buffer[index + i]);
         }
 
-        #endregion
-
         #region Overrides of Stream
-        
+
         /// <summary>
-        /// Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+        ///     Releases the unmanaged resources used by the <see cref="T:System.IO.Stream" /> and optionally releases the managed
+        ///     resources.
         /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources; false to release only unmanaged
+        ///     resources.
+        /// </param>
         protected override void Dispose(bool disposing)
         {
             Flush();
             base.Dispose(disposing);
         }
-        
+
         /// <summary>
         ///     When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written
         ///     to the underlying device.

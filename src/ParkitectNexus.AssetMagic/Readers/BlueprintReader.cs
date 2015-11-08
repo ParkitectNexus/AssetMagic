@@ -29,15 +29,15 @@ namespace ParkitectNexus.AssetMagic.Readers
     {
         #region Implementation of IBlueprintReader
 
-        public IBlueprint Deserialize(string data)
+        public virtual IBlueprint Deserialize(string data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
 
-            var parser = new DataObjectParser(typeof(BlueprintHeader), typeof(Coaster));
+            var parser = new DataObjectParser(typeof (BlueprintHeader), typeof (Coaster));
             return new Blueprint(data.GetFilledLines().Select(parser.Parse).ToArray());
         }
 
-        public IBlueprint Read(Bitmap image)
+        public virtual IBlueprint Read(Bitmap image)
         {
             if (image == null) throw new ArgumentNullException(nameof(image));
             var data = ReadData(image);
@@ -45,11 +45,11 @@ namespace ParkitectNexus.AssetMagic.Readers
             return Deserialize(data);
         }
 
-        public string ReadData(Bitmap image)
+        public virtual string ReadData(Bitmap image)
         {
             if (image == null) throw new ArgumentNullException(nameof(image));
 
-            using(var bdStream = new BitmapDataStream(image))
+            using (var bdStream = new BitmapDataStream(image))
             using (var gZipStream = new GZipStream(bdStream, CompressionMode.Decompress))
             using (var memoryStream = new MemoryStream())
             {

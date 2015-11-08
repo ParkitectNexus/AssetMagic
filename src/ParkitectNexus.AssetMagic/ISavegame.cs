@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Drawing;
 using ParkitectNexus.AssetMagic.Elements;
 
 namespace ParkitectNexus.AssetMagic
@@ -22,5 +23,7 @@ namespace ParkitectNexus.AssetMagic
         ISavegameHeader Header { get; }
         IPark Park { get; }
         int GuestCount { get; }
+
+        Image Screenshot { get; }
     }
 }

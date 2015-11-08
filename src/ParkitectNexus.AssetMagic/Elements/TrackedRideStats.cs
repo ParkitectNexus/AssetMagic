@@ -29,139 +29,139 @@ namespace ParkitectNexus.AssetMagic.Elements
 
         #region Implementation of ITrackedRideStats
 
-        public float MinVertG
+        public virtual float MinVertG
         {
             get { return Get<float>("minVertG"); }
             set { Set("minVertG", value); }
         }
 
-        public float MaxVertG
+        public virtual float MaxVertG
         {
             get { return Get<float>("maxVertG"); }
             set { Set("maxVertG", value); }
         }
 
-        public float MinLatG
+        public virtual float MinLatG
         {
             get { return Get<float>("minLatG"); }
             set { Set("minLatG", value); }
         }
 
-        public float MaxLatG
+        public virtual float MaxLatG
         {
             get { return Get<float>("maxLatG"); }
             set { Set("maxLatG", value); }
         }
 
-        public float AverageLatG
+        public virtual float AverageLatG
         {
             get { return Get<float>("averageLatG"); }
             set { Set("averageLatG", value); }
         }
 
-        public float MinLongG
+        public virtual float MinLongG
         {
             get { return Get<float>("minLongG"); }
             set { Set("minLongG", value); }
         }
 
-        public float MaxLongG
+        public virtual float MaxLongG
         {
             get { return Get<float>("maxLongG"); }
             set { Set("maxLongG", value); }
         }
 
-        public float MaxVelocity
+        public virtual float MaxVelocity
         {
             get { return Get<float>("maxVelocity"); }
             set { Set("maxVelocity", value); }
         }
 
-        public float MaxVelocityT
+        public virtual float MaxVelocityT
         {
             get { return Get<float>("maxVelocityT"); }
             set { Set("maxVelocityT", value); }
         }
 
-        public int DirectionChanges
+        public virtual int DirectionChanges
         {
             get { return Get<int>("directionChanges"); }
             set { Set("directionChanges", value); }
         }
 
-        public int Drops
+        public virtual int Drops
         {
             get { return Get<int>("drops"); }
             set { Set("drops", value); }
         }
 
-        public float TotalDropHeight
+        public virtual float TotalDropHeight
         {
             get { return Get<float>("totalDropHeight"); }
             set { Set("totalDropHeight", value); }
         }
 
-        public float BiggestDrop
+        public virtual float BiggestDrop
         {
             get { return Get<float>("biggestDrop"); }
             set { Set("biggestDrop", value); }
         }
 
-        public float BiggestDropStartT
+        public virtual float BiggestDropStartT
         {
             get { return Get<float>("biggestDropStartT"); }
             set { Set("biggestDropStartT", value); }
         }
 
-        public int Inversions
+        public virtual int Inversions
         {
             get { return Get<int>("inversions"); }
             set { Set("inversions", value); }
         }
 
-        public float RideLengthTime
+        public virtual float RideLengthTime
         {
             get { return Get<float>("rideLengthTime"); }
             set { Set("rideLengthTime", value); }
         }
 
-        public float RideLengthDistance
+        public virtual float RideLengthDistance
         {
             get { return Get<float>("rideLengthDistance"); }
             set { Set("rideLengthDistance", value); }
         }
 
-        public float RatingExcitement
+        public virtual float RatingExcitement
         {
             get { return Get<float>("ratingExcitement"); }
             set { Set("ratingExcitement", value); }
         }
 
-        public float RatingIntensity
+        public virtual float RatingIntensity
         {
             get { return Get<float>("ratingIntensity"); }
             set { Set("ratingIntensity", value); }
         }
 
-        public float RatingNausea
+        public virtual float RatingNausea
         {
             get { return Get<float>("ratingNausea"); }
             set { Set("ratingNausea", value); }
         }
 
-        public float AirTime
+        public virtual float AirTime
         {
             get { return Get<float>("airTime"); }
             set { Set("airTime", value); }
         }
 
-        public float AverageVelocity
+        public virtual float AverageVelocity
         {
             get { return Get<float>("averageVelocity"); }
             set { Set("averageVelocity", value); }
         }
 
-        public int HeadChoppers
+        public virtual int HeadChoppers
         {
             get { return Get<int>("headChoppers"); }
             set { Set("headChoppers", value); }

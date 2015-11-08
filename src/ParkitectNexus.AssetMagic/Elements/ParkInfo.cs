@@ -19,49 +19,49 @@ namespace ParkitectNexus.AssetMagic.Elements
     {
         #region Implementation of IParkInfo
 
-        public int Time
+        public virtual int Time
         {
             get { return Get<int>("time"); }
             set { Set("time", value); }
         }
 
-        public float Money
+        public virtual float Money
         {
             get { return Get<float>("money"); }
             set { Set("money", value); }
         }
 
-        public int GuestsLeftCount
+        public virtual int GuestsLeftCount
         {
             get { return Get<int>("guestsLeftCount"); }
             set { Set("guestsLeftCount", value); }
         }
 
-        public float ParkEntranceFee
+        public virtual float ParkEntranceFee
         {
             get { return Get<float>("parkEntranceFee"); }
             set { Set("parkEntranceFee", value); }
         }
 
-        public float RatingPriceSatisfaction
+        public virtual float RatingPriceSatisfaction
         {
             get { return Get<float>("ratingPriceSatisfaction"); }
             set { Set("ratingPriceSatisfaction", value); }
         }
 
-        public float RatingCleanliness
+        public virtual float RatingCleanliness
         {
             get { return Get<float>("ratingCleanliness"); }
             set { Set("ratingCleanliness", value); }
         }
 
-        public float RatingHappiness
+        public virtual float RatingHappiness
         {
             get { return Get<float>("ratingHappiness"); }
             set { Set("ratingHappiness", value); }
         }
 
-        public string Transactions
+        public virtual string Transactions
         {
             get { return Get<string>("transactions"); }
             set { Set("transactions", value); }

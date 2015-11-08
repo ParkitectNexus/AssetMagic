@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using ParkitectNexus.AssetMagic.Attributes;
+
 namespace ParkitectNexus.AssetMagic.Elements
 {
     [DataObjectName("(.*Coaster|.*Railway)")]
@@ -20,85 +22,85 @@ namespace ParkitectNexus.AssetMagic.Elements
     {
         #region Implementation of ICoaster
 
-        public int Id
+        public virtual int Id
         {
             get { return Get<int>("@id"); }
             set { Set("@id", value); }
         }
 
-        public float[] Position
+        public virtual float[] Position
         {
             get { return GetArray<float>("pos"); }
             set { Set("pos", value); }
         }
 
-        public float[] Rotation
+        public virtual float[] Rotation
         {
             get { return GetArray<float>("rot"); }
             set { Set("rot", value); }
         }
 
-        public float[] CarColors
+        public virtual float[] CarColors
         {
             get { return GetArray<float>("carColors"); }
             set { Set("carColors", value); }
         }
 
-        public float[] TrackColors
+        public virtual float[] TrackColors
         {
             get { return GetArray<float>("trackColors"); }
             set { Set("trackColors", value); }
         }
 
-        public int TrackId
+        public virtual int TrackId
         {
             get { return Get<int>("Track"); }
             set { Set("Track", value); }
         }
 
-        public float EntranceFee
+        public virtual float EntranceFee
         {
             get { return Get<float>("entranceFee"); }
             set { Set("entranceFee", value); }
         }
 
-        public float Duration
+        public virtual float Duration
         {
             get { return Get<float>("duration"); }
             set { Set("duration", value); }
         }
 
-        public ITrackedRideStats Statistics
+        public virtual ITrackedRideStats Statistics
         {
             get { return Get<TrackedRideStats>("stats"); }
             set { Set("stats", value); }
         }
 
-        public int TrainCount
+        public virtual int TrainCount
         {
             get { return Get<int>("trainCount"); }
             set { Set("trainCount", value); }
         }
 
-        public int TrainLength
+        public virtual int TrainLength
         {
             get { return Get<int>("trainLength"); }
             set { Set("trainLength", value); }
         }
 
-        public string CarType
+        public virtual string CarType
         {
             get { return Get<string>("carType"); }
             set { Set("carType", value); }
         }
 
-        public int WaitTime
+        public virtual int WaitTime
         {
             get { return Get<int>("waitTime"); }
             set { Set("waitTime", value); }
         }
 
-        public object StationControllers
+        public virtual object StationControllers
         {
             get { return Get<object>("stationControllers"); }
             set { Set("stationControllers", value); }

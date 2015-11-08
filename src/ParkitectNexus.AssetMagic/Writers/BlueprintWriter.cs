@@ -29,7 +29,7 @@ namespace ParkitectNexus.AssetMagic.Writers
     {
         #region Implementation of IBlueprintWriter
 
-        public string Serialize(IBlueprint blueprint)
+        public virtual string Serialize(IBlueprint blueprint)
         {
             if (blueprint == null) throw new ArgumentNullException(nameof(blueprint));
 
@@ -42,7 +42,7 @@ namespace ParkitectNexus.AssetMagic.Writers
             return string.Concat(blueprint.Data.Select(d => JsonConvert.SerializeObject(d.Data, settings) + "\r\n"));
         }
 
-        public void Serialize(IBlueprint blueprint, Stream destinationStream)
+        public virtual void Serialize(IBlueprint blueprint, Stream destinationStream)
         {
             if (blueprint == null) throw new ArgumentNullException(nameof(blueprint));
             if (destinationStream == null) throw new ArgumentNullException(nameof(destinationStream));
@@ -51,12 +51,12 @@ namespace ParkitectNexus.AssetMagic.Writers
                 streamWriter.Write(Serialize(blueprint));
         }
 
-        public void Write(IBlueprint blueprint, Bitmap destinationImage)
+        public virtual void Write(IBlueprint blueprint, Bitmap destinationImage)
         {
             WriteData(Serialize(blueprint), destinationImage);
         }
 
-        public void WriteData(string data, Bitmap destinationBitmap)
+        public virtual void WriteData(string data, Bitmap destinationBitmap)
         {
             using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(data)))
             using (var bdStream = new BitmapDataStream(destinationBitmap))

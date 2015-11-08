@@ -14,9 +14,10 @@
 // limitations under the License.
 
 using System;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using ParkitectNexus.AssetMagic.Elements;
-using ParkitectNexus.AssetMagic.Utilities;
 
 namespace ParkitectNexus.AssetMagic
 {
@@ -34,10 +35,20 @@ namespace ParkitectNexus.AssetMagic
 
         #region Implementation of ISavegame
 
-        public ISavegameHeader Header { get; }
+        public virtual ISavegameHeader Header { get; }
 
-        public IPark Park { get; }
-        public int GuestCount => GetElements<IGuest>().Count();
+        public virtual IPark Park { get; }
+        public virtual int GuestCount => GetElements<IGuest>().Count();
+
+        public Image Screenshot
+        {
+            get
+            {
+                var bytes = Convert.FromBase64String(Header.Screenshot);
+                using (var memoryStream = new MemoryStream(bytes, 0, bytes.Length))
+                    return Image.FromStream(memoryStream, true);
+            }
+        }
 
         #endregion
     }
