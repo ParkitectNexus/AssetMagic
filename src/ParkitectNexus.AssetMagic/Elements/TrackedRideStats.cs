@@ -52,13 +52,7 @@ namespace ParkitectNexus.AssetMagic.Elements
             get { return Get<float>("maxLatG"); }
             set { Set("maxLatG", value); }
         }
-
-        public virtual float AverageLatG
-        {
-            get { return Get<float>("averageLatG"); }
-            set { Set("averageLatG", value); }
-        }
-
+        
         public virtual float MinLongG
         {
             get { return Get<float>("minLongG"); }

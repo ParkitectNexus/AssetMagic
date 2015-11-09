@@ -42,8 +42,10 @@ namespace ParkitectNexus.AssetMagic.Debug
             var blueprint2 = blueprintReader.Read(bmp);
 
             Console.WriteLine("BLUEPRINT:");
+            Console.WriteLine("CC: " + blueprint.Coaster.CarColors);
+            Console.WriteLine("T: " + blueprint.Header.ContentType);
             Console.WriteLine("Name: " + blueprint.Header.Name);
-
+            Console.WriteLine(blueprint.Coaster.Statistics.Inversions);
             Console.WriteLine("BLUEPRINT2:");
             Console.WriteLine("Name: " + blueprint2.Header.Name);
 

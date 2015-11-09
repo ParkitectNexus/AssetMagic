@@ -92,7 +92,14 @@ namespace ParkitectNexus.AssetMagic.Elements
                     : Activator.CreateInstance<T>();
             }
 
-            return (T) Convert.ChangeType(obj, typeof (T));
+            try
+            {
+                return (T) Convert.ChangeType(obj, typeof (T));
+            }
+            catch
+            {
+                return default(T);
+            }
         }
 
         public virtual T[] GetArray<T>(string key)
@@ -103,9 +110,15 @@ namespace ParkitectNexus.AssetMagic.Elements
             var array1 = obj as T[];
             if (array1 != null)
                 return array1;
-
-            var array = obj as JArray;
-            return array?.Values<T>().ToArray();
+            try
+            {
+                var array = obj as JArray;
+                return array?.Values<T>().ToArray();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public virtual void Set(string key, object value)

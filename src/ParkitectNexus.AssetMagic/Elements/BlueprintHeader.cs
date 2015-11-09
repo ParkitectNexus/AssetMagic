@@ -29,7 +29,7 @@ namespace ParkitectNexus.AssetMagic.Elements
 
         public virtual string[] ContentTypes
         {
-            get { return Get<string[]>("types"); }
+            get { return GetArray<string>("types"); }
             set { Set("types", value); }
         }
 

@@ -40,15 +40,15 @@ namespace ParkitectNexus.AssetMagic.Elements
             set { Set("rot", value); }
         }
 
-        public virtual float[] CarColors
+        public virtual object CarColors
         {
-            get { return GetArray<float>("carColors"); }
+            get { return GetArray<object>("carColors"); }
             set { Set("carColors", value); }
         }
 
-        public virtual float[] TrackColors
+        public virtual object TrackColors
         {
-            get { return GetArray<float>("trackColors"); }
+            get { return GetArray<object>("trackColors"); }
             set { Set("trackColors", value); }
         }
 
@@ -102,7 +102,7 @@ namespace ParkitectNexus.AssetMagic.Elements
 
         public virtual object StationControllers
         {
-            get { return Get<object>("stationControllers"); }
+            get { return GetArray<object>("stationControllers"); }
             set { Set("stationControllers", value); }
         }
 

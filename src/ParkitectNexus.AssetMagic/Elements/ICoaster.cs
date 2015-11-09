@@ -20,8 +20,8 @@ namespace ParkitectNexus.AssetMagic.Elements
         int Id { get; set; }
         float[] Position { get; set; }
         float[] Rotation { get; set; }
-        float[] CarColors { get; set; }
-        float[] TrackColors { get; set; }
+        object CarColors { get; set; }
+        object TrackColors { get; set; }
         int TrackId { get; set; }
         float EntranceFee { get; set; }
         float Duration { get; set; }

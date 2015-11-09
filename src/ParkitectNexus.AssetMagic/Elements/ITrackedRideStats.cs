@@ -21,7 +21,6 @@ namespace ParkitectNexus.AssetMagic.Elements
         float MaxVertG { get; set; }
         float MinLatG { get; set; }
         float MaxLatG { get; set; }
-        float AverageLatG { get; set; }
         float MinLongG { get; set; }
         float MaxLongG { get; set; }
         float MaxVelocity { get; set; }
