@@ -13,12 +13,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
     public class BlueprintHeader : FileHeader, IBlueprintHeader
     {
+        public BlueprintHeader()
+        {
+        }
+
+        public BlueprintHeader(IDictionary<string, object> data) : base(data)
+        {
+        }
+
         #region Implementation of IBlueprintHeader
 
         public virtual string Name

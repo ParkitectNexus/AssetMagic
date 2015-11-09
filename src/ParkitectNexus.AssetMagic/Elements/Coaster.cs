@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using ParkitectNexus.AssetMagic.Attributes;
 
 namespace ParkitectNexus.AssetMagic.Elements
@@ -20,6 +21,14 @@ namespace ParkitectNexus.AssetMagic.Elements
     [DataObjectName("(.*Coaster|WildMouse|MiniatureRailway|SuspendedMonorail|LogFlume)")]
     public class Coaster : DataObject, ICoaster
     {
+        public Coaster()
+        {
+        }
+
+        public Coaster(IDictionary<string, object> data) : base(data)
+        {
+        }
+
         #region Implementation of ICoaster
 
         public virtual int Id

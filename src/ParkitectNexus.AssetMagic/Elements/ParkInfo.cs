@@ -13,12 +13,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace ParkitectNexus.AssetMagic.Elements
 {
     public class ParkInfo : DataObject, IParkInfo
     {
-        #region Implementation of IParkInfo
+        public ParkInfo()
+        {
+        }
 
+        public ParkInfo(IDictionary<string, object> data) : base(data)
+        {
+            
+        }
+
+        #region Implementation of IParkInfo
+        
         public virtual int Time
         {
             get { return Get<int>("time"); }

@@ -14,11 +14,21 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 
 namespace ParkitectNexus.AssetMagic.Elements
 {
     public class FileHeader : DataObject, IFileHeader
     {
+        public FileHeader()
+        {
+        }
+
+        public FileHeader(IDictionary<string, object> data) : base(data)
+        {
+
+        }
+
         #region Implementation of IFileHeader
 
         public virtual DateTime Date

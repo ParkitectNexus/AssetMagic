@@ -13,10 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace ParkitectNexus.AssetMagic.Elements
 {
     public class Guest : DataObject, IGuest
     {
+        public Guest()
+        {
+        }
+
+        public Guest(IDictionary<string, object> data) : base(data)
+        {
+        }
+
         #region Implementation of IGuest
 
         public virtual int Id

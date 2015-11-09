@@ -13,10 +13,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+
 namespace ParkitectNexus.AssetMagic.Elements
 {
     public class ParkSettings : DataObject, IParkSettings
     {
+        public ParkSettings()
+        {
+        }
+
+        public ParkSettings(IDictionary<string, object> data) : base(data)
+        {
+
+        }
+
         #region Implementation of IParkSettings
 
         public virtual bool ResourcesEnabled
