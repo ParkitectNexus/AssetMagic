@@ -34,7 +34,7 @@ namespace ParkitectNexus.AssetMagic.Debug
                 blueprint = blueprintReader.Read(image);
 
             var savegame =
-                savegameReader.Deserialize(File.ReadAllText(@"..\..\..\..\tests\parks\unnamed-park.txt"));
+                savegameReader.Deserialize(File.ReadAllText(@"..\..\..\..\tests\parks\Parkitect_Pre-Alpha_6b.txt"));
 
             var bmp = new Bitmap(512, 512);
             blueprintWriter.Write(blueprint, bmp);
@@ -50,6 +50,12 @@ namespace ParkitectNexus.AssetMagic.Debug
             Console.WriteLine("Name: " + blueprint2.Header.Name);
 
             Console.WriteLine("SAVEGAME:");
+            Console.WriteLine("-----------Mods-----------------");
+            foreach(var mod in savegame.Header.ActiveMods)
+            {
+                Console.WriteLine(mod.Name + ":" + mod.Identifier);
+            }
+            Console.WriteLine("-----------Mods-----------------");
             Console.WriteLine("Name: " + savegame.Header.Name);
             Console.WriteLine("GuestCount: " + savegame.GuestCount);
 

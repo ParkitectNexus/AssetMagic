@@ -13,6 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 
 namespace ParkitectNexus.AssetMagic.Elements
@@ -72,6 +75,14 @@ namespace ParkitectNexus.AssetMagic.Elements
             get { return Get<string>("screenshot"); }
             set { Set("screenshot", value); }
         }
+
+        public IMod[] ActiveMods
+        {
+            get {return GetArray<Mod>("activeMods");}
+            set { Set("activeMods", value); }
+        }
+        //"activeMods":[{"@type":"FileHeader+ActiveModEntry","identifier":"H-POPS@Parkitect_BetterPerspectiveCamera","name":"BetterPerspective"}]}
+
 
         #endregion
     }

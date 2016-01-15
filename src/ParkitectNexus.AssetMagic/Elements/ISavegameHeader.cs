@@ -24,5 +24,7 @@ namespace ParkitectNexus.AssetMagic.Elements
         float TimePlayed { get; set; }
         string Name { get; set; }
         string Screenshot { get; set; }
+        IMod[] ActiveMods { get; set; }
+
     }
 }
