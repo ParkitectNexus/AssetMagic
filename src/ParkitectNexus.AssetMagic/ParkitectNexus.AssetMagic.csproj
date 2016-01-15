@@ -53,11 +53,13 @@
     <Compile Include="Elements\IDataObject.cs" />
     <Compile Include="Elements\IFileHeader.cs" />
     <Compile Include="Elements\IGuest.cs" />
+    <Compile Include="Elements\IMod.cs" />
     <Compile Include="Elements\IPark.cs" />
     <Compile Include="Elements\IParkInfo.cs" />
     <Compile Include="Elements\IParkSettings.cs" />
     <Compile Include="Elements\ISavegameHeader.cs" />
     <Compile Include="Elements\ITrackedRideStats.cs" />
+    <Compile Include="Elements\Mod.cs" />
     <Compile Include="Elements\Park.cs" />
     <Compile Include="Elements\ParkInfo.cs" />
     <Compile Include="Elements\ParkSettings.cs" />

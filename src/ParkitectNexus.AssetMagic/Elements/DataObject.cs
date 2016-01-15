@@ -113,7 +113,21 @@ namespace ParkitectNexus.AssetMagic.Elements
             try
             {
                 var array = obj as JArray;
-                return array?.Values<T>().ToArray();
+                if (typeof(DataObject).IsAssignableFrom(typeof(T)))
+                {
+                    var output = new T[array.Count];
+                    var objects = array?.Values<JObject>().ToArray();
+                    for (int x = 0; x < objects.Length; ++x)
+                    {
+                        output[x] = (T)Activator.CreateInstance(typeof(T), objects[x].ToObject<IDictionary<string, object>>() as IDictionary<string, object>); 
+                    }
+                    return output;
+                }
+                else
+                {
+                    return array?.Values<T>().ToArray();
+                }
+
             }
             catch
             {
