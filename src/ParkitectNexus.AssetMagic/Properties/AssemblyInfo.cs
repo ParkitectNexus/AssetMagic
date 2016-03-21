@@ -1,5 +1,5 @@
 ﻿// ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("ParkitectNexus.AssetMagic")]
-[assembly: AssemblyDescription("Read data from Parkitect Assets")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ParkitectNexus")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ParkitectNexus.AssetMagic")]
-[assembly: AssemblyCopyright("Copyright © ParkitectNexus, Tim Potze 2016")]
-[assembly: AssemblyTrademark("ParkitectNexus")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("bb85a8e0-7b30-4292-91bf-6d36c0da311c")]
+[assembly: Guid("ab184510-dd74-4304-a7fb-728a4220c7c4")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -50,5 +50,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.1.2.0")]
-[assembly: AssemblyFileVersion("0.1.2.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

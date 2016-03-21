@@ -1,5 +1,5 @@
 ﻿// ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,10 +14,7 @@
 // limitations under the License.
 
 using System;
-using System.Drawing;
-using System.IO;
-using ParkitectNexus.AssetMagic.Readers;
-using ParkitectNexus.AssetMagic.Writers;
+using ParkitectNexus.AssetMagic.Converters;
 
 namespace ParkitectNexus.AssetMagic.Debug
 {
@@ -25,40 +22,15 @@ namespace ParkitectNexus.AssetMagic.Debug
     {
         private static void Main(string[] args)
         {
-            var blueprintReader = new BlueprintReader();
-            var savegameReader = new SavegameReader();
-            var blueprintWriter = new BlueprintWriter();
+            var bp = BlueprintConverter.DeserializeFromFile(@"..\..\..\..\tests\blueprints\test.png");
 
-            IBlueprint blueprint;
-            using (var image = (Bitmap) Image.FromFile(@"..\..\..\..\tests\blueprints\fire-vortex-arrow.png"))
-                blueprint = blueprintReader.Read(image);
-
-            var savegame =
-                savegameReader.Deserialize(File.ReadAllText(@"..\..\..\..\tests\parks\Parkitect_Pre-Alpha_6b.txt"));
-
-            var bmp = new Bitmap(512, 512);
-            blueprintWriter.Write(blueprint, bmp);
-
-            var blueprint2 = blueprintReader.Read(bmp);
-
-            Console.WriteLine("BLUEPRINT:");
-            Console.WriteLine("CC: " + blueprint.Coaster.CarColors);
-            Console.WriteLine("T: " + blueprint.Header.ContentType);
-            Console.WriteLine("Name: " + blueprint.Header.Name);
-            Console.WriteLine(blueprint.Coaster.Statistics.Inversions);
-            Console.WriteLine("BLUEPRINT2:");
-            Console.WriteLine("Name: " + blueprint2.Header.Name);
-
-            Console.WriteLine("SAVEGAME:");
-            Console.WriteLine("-----------Mods-----------------");
-            foreach(var mod in savegame.Header.ActiveMods)
-            {
-                Console.WriteLine(mod.Name + ":" + mod.Identifier);
-            }
-            Console.WriteLine("-----------Mods-----------------");
-            Console.WriteLine("Name: " + savegame.Header.Name);
-            Console.WriteLine("GuestCount: " + savegame.GuestCount);
-
+            Console.WriteLine($"Blueprint: {bp.Header.Name}");
+            Console.WriteLine($"Content type: {bp.Header.ContentType}");
+            Console.WriteLine($"Date: {bp.Header.Date}");
+            Console.WriteLine($"GameVersion: {bp.Header.GameVersion}");
+            Console.WriteLine($"GameVersionName: {bp.Header.GameVersionName}");
+            Console.WriteLine($"SavegameVersion: {bp.Header.SavegameVersion}");
+            Console.WriteLine($"Type: {bp.Header.Type}");
             Console.ReadLine();
         }
     }

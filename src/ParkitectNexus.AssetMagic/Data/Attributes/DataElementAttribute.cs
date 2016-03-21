@@ -13,19 +13,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Drawing;
-using ParkitectNexus.AssetMagic.Data.Savegames;
+using System;
 
-namespace ParkitectNexus.AssetMagic.Converters
+namespace ParkitectNexus.AssetMagic.Data
 {
-    public interface ISavegame : ISaveFile
+    [AttributeUsage(AttributeTargets.Class)]
+    public class DataElementAttribute : Attribute
     {
-        SavegameHeader Header { get; }
+        public DataElementAttribute(string pattern)
+        {
+            Pattern = pattern;
+        }
 
-        Park Park { get; }
-
-        int GuestCount { get; }
-
-        Image Screenshot { get; }
+        public string Pattern { get; }
     }
 }

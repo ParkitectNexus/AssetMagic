@@ -1,5 +1,5 @@
 ﻿// ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ParkitectNexus.AssetMagic.Debug")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -37,7 +37,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("9e2aecec-a259-4cf3-a539-fd8d3b83afda")]
+[assembly: Guid("ebd124fe-caa2-4b5f-b6bd-378250d564af")]
 
 // Version information for an assembly consists of the following four values:
 //

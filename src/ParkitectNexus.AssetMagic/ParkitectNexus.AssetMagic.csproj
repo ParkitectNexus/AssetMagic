@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BB85A8E0-7B30-4292-91BF-6D36C0DA311C}</ProjectGuid>
+    <ProjectGuid>{AB184510-DD74-4304-A7FB-728A4220C7C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ParkitectNexus.AssetMagic</RootNamespace>
     <AssemblyName>ParkitectNexus.AssetMagic</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -24,15 +24,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -47,52 +46,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blueprint.cs" />
-    <Compile Include="Elements\Guest.cs" />
-    <Compile Include="Elements\IBlueprintHeader.cs" />
-    <Compile Include="Elements\ICoaster.cs" />
-    <Compile Include="Elements\IDataObject.cs" />
-    <Compile Include="Elements\IFileHeader.cs" />
-    <Compile Include="Elements\IGuest.cs" />
-    <Compile Include="Elements\IMod.cs" />
-    <Compile Include="Elements\IPark.cs" />
-    <Compile Include="Elements\IParkInfo.cs" />
-    <Compile Include="Elements\IParkSettings.cs" />
-    <Compile Include="Elements\ISavegameHeader.cs" />
-    <Compile Include="Elements\ITrackedRideStats.cs" />
-    <Compile Include="Elements\Mod.cs" />
-    <Compile Include="Elements\Park.cs" />
-    <Compile Include="Elements\ParkInfo.cs" />
-    <Compile Include="Elements\ParkSettings.cs" />
-    <Compile Include="Elements\SavegameHeader.cs" />
-    <Compile Include="InvalidSavegameException.cs" />
-    <Compile Include="Streams\BitmapDataStream.cs" />
-    <Compile Include="Readers\ISavegameReader.cs" />
-    <Compile Include="Readers\SavegameReader.cs" />
-    <Compile Include="SaveFile.cs" />
-    <Compile Include="ISaveFile.cs" />
-    <Compile Include="Writers\BlueprintWriter.cs" />
-    <Compile Include="Writers\IBlueprintWriter.cs" />
-    <Compile Include="ISavegame.cs" />
-    <Compile Include="JsonConverters\DictionaryConverter.cs" />
-    <Compile Include="Readers\BlueprintReader.cs" />
-    <Compile Include="Elements\BlueprintHeader.cs" />
-    <Compile Include="Elements\Coaster.cs" />
-    <Compile Include="Elements\DataObject.cs" />
-    <Compile Include="Attributes\DataObjectNameAttribute.cs" />
-    <Compile Include="DataObjectParser.cs" />
-    <Compile Include="Elements\FileHeader.cs" />
     <Compile Include="IBlueprint.cs" />
-    <Compile Include="Readers\IBlueprintReader.cs" />
     <Compile Include="InvalidBlueprintException.cs" />
-    <Compile Include="JsonConverters\MiniJsonContractResolver.cs" />
-    <Compile Include="JsonConverters\MiniJsonFloatConverter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Elements\TrackedRideStats.cs" />
+    <Compile Include="InvalidSavegameException.cs" />
+    <Compile Include="ISaveFile.cs" />
+    <Compile Include="ISavegame.cs" />
+    <Compile Include="SaveFile.cs" />
     <Compile Include="Savegame.cs" />
+    <Compile Include="Converters\SavegameConverter.cs" />
+    <Compile Include="Data\Coasters\Coaster.cs" />
+    <Compile Include="Data\Coasters\TrackedRideStats.cs" />
+    <Compile Include="Data\Generic\ActiveModEntry.cs" />
+    <Compile Include="Data\Savegames\Guest.cs" />
+    <Compile Include="Data\Savegames\Park.cs" />
+    <Compile Include="Data\Savegames\ParkInfo.cs" />
+    <Compile Include="Data\Savegames\ParkSettings.cs" />
+    <Compile Include="Data\Savegames\SavegameHeader.cs" />
+    <Compile Include="Streams\BitmapDataStream.cs" />
+    <Compile Include="Utilities\AssemblyUtility.cs" />
+    <Compile Include="Data\Blueprints\BlueprintHeader.cs" />
+    <Compile Include="Data\Attributes\DataAttribute.cs" />
+    <Compile Include="Data\Attributes\DataAttributeUtility.cs" />
+    <Compile Include="Data\DataElement.cs" />
+    <Compile Include="Data\Attributes\DataElementAttribute.cs" />
+    <Compile Include="Data\DataElementProxy.cs" />
+    <Compile Include="Data\Generic\FileHeader.cs" />
+    <Compile Include="Data\Attributes\IgnoreDataAttribute.cs" />
+    <Compile Include="JsonConverters\DictionaryConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Converters\BlueprintConverter.cs" />
     <Compile Include="Utilities\StringUtility.cs" />
-    <Compile Include="Writers\ISavegameWriter.cs" />
-    <Compile Include="Writers\SavegameWriter.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

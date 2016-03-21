@@ -1,5 +1,5 @@
 // ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,18 +13,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using ParkitectNexus.AssetMagic.Elements;
+using System.Collections.Generic;
+using ParkitectNexus.AssetMagic.Data;
+using ParkitectNexus.AssetMagic.Data.Blueprints;
+using ParkitectNexus.AssetMagic.Data.Coasters;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Converters
 {
     public class Blueprint : SaveFile, IBlueprint
     {
-        public Blueprint(DataObject[] data)
-        {
-            if (data == null) throw new ArgumentNullException(nameof(data));
+        private readonly IEnumerable<IDataElement> _data;
 
-            Data = data;
+        public Blueprint(IEnumerable<IDataElement> data) : base(data)
+        {
+            _data = data;
 
             Header = GetElement<BlueprintHeader>();
             Coaster = GetElement<Coaster>();
@@ -32,9 +34,9 @@ namespace ParkitectNexus.AssetMagic
 
         #region Implementation of IBlueprint
 
-        public virtual IBlueprintHeader Header { get; }
+        public virtual BlueprintHeader Header { get; }
 
-        public virtual ICoaster Coaster { get; }
+        public virtual Coaster Coaster { get; }
 
         #endregion
     }

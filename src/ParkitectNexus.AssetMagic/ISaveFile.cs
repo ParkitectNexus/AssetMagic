@@ -1,5 +1,5 @@
 // ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,14 +14,15 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using ParkitectNexus.AssetMagic.Elements;
+using ParkitectNexus.AssetMagic.Data;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Converters
 {
     public interface ISaveFile
     {
-        IEnumerable<DataObject> Data { get; }
-        T GetElement<T>() where T : IDataObject;
-        IEnumerable<T> GetElements<T>() where T : IDataObject;
+        IEnumerable<IDataElement> Data { get; }
+
+        T GetElement<T>() where T : IDataElement;
+        IEnumerable<T> GetElements<T>() where T : IDataElement;
     }
 }

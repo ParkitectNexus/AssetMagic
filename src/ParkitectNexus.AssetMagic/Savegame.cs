@@ -1,5 +1,5 @@
 // ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using ParkitectNexus.AssetMagic.Elements;
+using ParkitectNexus.AssetMagic.Data;
+using ParkitectNexus.AssetMagic.Data.Savegames;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Converters
 {
     public class Savegame : SaveFile, ISavegame
     {
-        public Savegame(DataObject[] data)
+        public Savegame(IEnumerable<IDataElement> data) : base(data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
-
-            Data = data;
 
             Header = GetElement<SavegameHeader>();
             Park = GetElement<Park>();
@@ -35,10 +35,11 @@ namespace ParkitectNexus.AssetMagic
 
         #region Implementation of ISavegame
 
-        public virtual ISavegameHeader Header { get; }
+        public SavegameHeader Header { get; }
 
-        public virtual IPark Park { get; }
-        public virtual int GuestCount => GetElements<IGuest>().Count();
+        public Park Park { get; }
+
+        public int GuestCount => GetElements<Guest>().Count();
 
         public Image Screenshot
         {

@@ -13,19 +13,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Drawing;
-using ParkitectNexus.AssetMagic.Data.Savegames;
+using System;
+using System.Reflection;
 
-namespace ParkitectNexus.AssetMagic.Converters
+namespace ParkitectNexus.AssetMagic.Data.Attributes
 {
-    public interface ISavegame : ISaveFile
+    public static class DataAttributeUtility
     {
-        SavegameHeader Header { get; }
+        public static string GetDataElementName(this PropertyInfo propertyInfo)
+        {
+            if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
+            var attribute = propertyInfo.GetCustomAttribute<DataAttribute>();
+            var name = char.ToLowerInvariant(propertyInfo.Name[0]) + propertyInfo.Name.Substring(1);
 
-        Park Park { get; }
+            if (attribute?.Name != null)
+                name = attribute.Name;
 
-        int GuestCount { get; }
-
-        Image Screenshot { get; }
+            return name;
+        }
     }
 }

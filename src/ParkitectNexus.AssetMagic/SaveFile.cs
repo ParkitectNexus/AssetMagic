@@ -1,5 +1,5 @@
 // ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,31 +15,27 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using ParkitectNexus.AssetMagic.Elements;
+using ParkitectNexus.AssetMagic.Data;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Converters
 {
     public abstract class SaveFile : ISaveFile
     {
-        protected SaveFile()
-        {
-        }
-
-        protected SaveFile(IEnumerable<DataObject> data)
+        protected SaveFile(IEnumerable<IDataElement> data)
         {
             Data = data;
         }
 
         #region Implementation of ISaveFile
 
-        public virtual IEnumerable<DataObject> Data { get; protected set; }
+        public virtual IEnumerable<IDataElement> Data { get; protected set; }
 
-        public virtual T GetElement<T>() where T : IDataObject
+        public virtual T GetElement<T>() where T : IDataElement
         {
             return GetElements<T>().FirstOrDefault();
         }
 
-        public virtual IEnumerable<T> GetElements<T>() where T : IDataObject
+        public virtual IEnumerable<T> GetElements<T>() where T : IDataElement
         {
             return Data.OfType<T>();
         }

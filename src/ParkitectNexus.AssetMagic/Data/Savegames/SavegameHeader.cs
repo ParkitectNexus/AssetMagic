@@ -1,4 +1,4 @@
-// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetMagic
 // Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +13,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Drawing;
-using ParkitectNexus.AssetMagic.Data.Savegames;
+using ParkitectNexus.AssetMagic.Data.Generic;
 
-namespace ParkitectNexus.AssetMagic.Converters
+namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
-    public interface ISavegame : ISaveFile
+    public class SavegameHeader : FileHeader
     {
-        SavegameHeader Header { get; }
+        public int ParkDate { get; set; }
 
-        Park Park { get; }
+        public float Money { get; set; }
 
-        int GuestCount { get; }
+        public int GuestCount { get; set; }
 
-        Image Screenshot { get; }
+        public float ParkRating { get; set; }
+
+        public float TimePlayed { get; set; }
+
+        public string Name { get; set; }
+
+        public string Screenshot { get; set; }
+
+        public ActiveModEntry[] ActiveMods { get; set; }
     }
 }

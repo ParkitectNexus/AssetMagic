@@ -13,16 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Reflection;
 
 namespace ParkitectNexus.AssetMagic.Utilities
 {
-    public static class StringUtility
+    internal static class AssemblyUtility
     {
-        public static IEnumerable<string> GetFilledLines(this string input)
+        public static Type[] GetTypesInNameSpaces(this Assembly assembly, bool includeSubNamespaces,
+            params string[] namespaces)
         {
-            return input.Split('\r', '\n').Where(s => !string.IsNullOrWhiteSpace(s));
+            return
+                assembly.GetTypes()
+                    .Where(
+                        t => namespaces.Any(n => t.Namespace.StartsWith(n)) && namespaces.Any(
+                            n => n == t.Namespace || (includeSubNamespaces && t.Namespace.StartsWith(n + "."))) &&
+                             t.IsClass && !t.IsInterface && !t.IsEnum && t.IsPublic)
+                    .ToArray();
         }
     }
 }

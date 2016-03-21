@@ -1,5 +1,5 @@
 // ParkitectNexus.AssetMagic
-// Copyright 2015 Tim Potze
+// Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,13 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using ParkitectNexus.AssetMagic.Elements;
+using ParkitectNexus.AssetMagic.Data.Blueprints;
+using ParkitectNexus.AssetMagic.Data.Coasters;
 
-namespace ParkitectNexus.AssetMagic
+namespace ParkitectNexus.AssetMagic.Converters
 {
     public interface IBlueprint : ISaveFile
     {
-        IBlueprintHeader Header { get; }
-        ICoaster Coaster { get; }
+        BlueprintHeader Header { get; }
+
+        Coaster Coaster { get; }
     }
 }
