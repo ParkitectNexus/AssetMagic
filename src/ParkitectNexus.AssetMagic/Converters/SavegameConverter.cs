@@ -77,7 +77,7 @@ namespace ParkitectNexus.AssetMagic.Converters
                 ContractResolver = new MiniJsonContractResolver(),
                 Converters = new[] {new MiniJsonFloatConverter()}
             };
-            return string.Concat(savegame.Data.Select(d => JsonConvert.SerializeObject(d.Data, settings) + "\r\n"));
+            return string.Concat(savegame.Data.Select(d => JsonConvert.SerializeObject((d as DataElement).Data, settings) + "\r\n"));
         }
 
         public static void SerializeToStream(ISavegame savegame, Stream stream)

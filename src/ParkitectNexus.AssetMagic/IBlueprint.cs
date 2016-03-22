@@ -14,14 +14,11 @@
 // limitations under the License.
 
 using ParkitectNexus.AssetMagic.Data.Blueprints;
-using ParkitectNexus.AssetMagic.Data.Coasters;
 
-namespace ParkitectNexus.AssetMagic.Converters
+namespace ParkitectNexus.AssetMagic
 {
     public interface IBlueprint : ISaveFile
     {
         BlueprintHeader Header { get; }
-
-        Coaster Coaster { get; }
     }
 }

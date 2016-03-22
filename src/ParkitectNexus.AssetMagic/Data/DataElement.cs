@@ -15,11 +15,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing.Design;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting;
 using System.Runtime.Remoting.Proxies;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ParkitectNexus.AssetMagic.Data.Attributes;
 using ParkitectNexus.AssetMagic.JsonConverters;
 using ParkitectNexus.AssetMagic.Utilities;
@@ -28,8 +31,6 @@ namespace ParkitectNexus.AssetMagic.Data
 {
     public interface IDataElement
     {
-        IDictionary<string, object> Data { get; }
-
         string Type { get; set; }
     }
 
@@ -38,20 +39,157 @@ namespace ParkitectNexus.AssetMagic.Data
     {
         private static readonly Type[] DefaultTypes =
         {
-            typeof (string), typeof (int), typeof (float), typeof (double), typeof (string[]), typeof (float[]),
-            typeof (int[]), typeof (double[]), typeof (long), typeof (long[])
+            typeof (string), typeof (double),  typeof (long)
         };
 
         public DataElement()
         {
             Data = new Dictionary<string, object>();
+            Type = GetType().Name;
+        }
+
+        public DataElement(IDictionary<string, object> data) : this()
+        {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            foreach (var kv in data)
+                Data[kv.Key] = kv.Value;
+
+            FillWithData(Data);
         }
 
         [IgnoreData]
-        public IDictionary<string, object> Data { get; private set; }
+        internal IDictionary<string, object> Data { get; private set; }
+
+        [IgnoreData]
+        public object this[string key]
+        {
+            get
+            {
+                if (key == null) throw new ArgumentNullException(nameof(key));
+                object value;
+                return Data.TryGetValue(key, out value) ? value : null;
+            }
+            set
+            {
+                if (key == null) throw new ArgumentNullException(nameof(key));
+
+                var property = GetPropertyForKey(key);
+
+                if (property != null)
+                {
+                    var propertyType = property.PropertyType;
+
+                    if (!propertyType.IsClass && value == null)
+                        throw new ArgumentException("Invalid value type", nameof(value));
+
+                    if (!propertyType.IsInstanceOfType(value))
+                        throw new ArgumentException("Invalid value type", nameof(value));
+
+                    property.SetValue(this, value);
+
+                    var valueElement = value as DataElement;
+                    Data[key] = valueElement == null ? value : valueElement.Data;
+                }
+                else
+                {
+                    Data[key] = value;
+                }
+            }
+        }
 
         [Data("@type")]
         public string Type { get; set; }
+
+        #region Mapping
+
+        public string[] GetUnmappedProperties()
+        {
+            return Data.Keys.Where(key => GetPropertyForKey(key) == null).ToArray();
+        }
+
+        private PropertyInfo GetPropertyForKey(string key)
+        {
+            return key == null
+                ? null
+                : (GetType()
+                    .GetProperties()
+                    .FirstOrDefault(
+                        p => p.GetDataElementName() == key && p.GetCustomAttribute<IgnoreDataAttribute>() == null) ??
+                   GetType()
+                       .GetProperties()
+                       .FirstOrDefault(
+                           p =>
+                               p.GetCustomAttribute<DataAttribute>()?.Name == key &&
+                               p.GetCustomAttribute<IgnoreDataAttribute>() == null));
+        }
+
+        private object MapValueToType(object value, Type type)
+        {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+
+            if (type.IsInstanceOfType(value))
+                return value;
+            if (type == typeof(DateTime))
+            {
+                var lValue = (long)value;
+                return new DateTime(lValue);
+            }
+            if (type.IsArray)
+            {
+                if (value is JArray)
+                {
+                    var toObject = typeof (JArray).GetMethod("ToObject", new Type[0]);
+                    var genericToObject = toObject.MakeGenericMethod(type);
+                    return genericToObject.Invoke(value, null);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            if (typeof(DataElement).IsAssignableFrom(type))
+            {
+                var dictionary = value as IDictionary<string, object>;
+
+                if (dictionary != null)
+                {
+                    var result = CreateProxyForType(type);
+                    result.FillWithData(dictionary);
+                    return result;
+                }
+            }
+
+            throw new Exception("Unsupported type");
+        }
+
+        private object UnmapValueFromType(object value, Type type)
+        {
+            if (type == typeof (DateTime))
+            {
+                var dateTime = (DateTime) value;
+                return dateTime.Ticks;
+            }
+            if (type.IsArray)
+            {
+                var array = value as Array;
+                var elementType = type.GetElementType();
+
+                return new JArray(array.OfType<object>().Select(v => UnmapValueFromType(v, elementType)).ToArray());
+            }
+            if (typeof (DataElement).IsAssignableFrom(type))
+            {
+                var dataElement = value as DataElement;
+                return dataElement.Data;
+            }
+            if (DefaultTypes.Contains(type))
+                return value;
+
+            throw new Exception("Unsupported type");
+        }
+
+        #endregion
+
+        #region Parsing
 
         public static DataElement Parse(string input)
         {
@@ -86,19 +224,44 @@ namespace ParkitectNexus.AssetMagic.Data
             return result;
         }
 
+        #endregion
+
+        #region Proxy Factory
+
+        public static T Create<T>(string type) where T : DataElement
+        {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            var instance = CreateProxyForType(typeof (T)) as T;
+            instance.Type = type;
+            return instance;
+        }
+
+        public static DataElement Create(string type)
+        {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            return Create<DataElement>(type);
+        }
+
+        public static T Create<T>() where T : DataElement
+        {
+            return Create<T>(typeof (T).Name);
+        }
+
         private static DataElement CreateProxyForType(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
             if (!typeof (DataElement).IsAssignableFrom(type)) throw new ArgumentException("Invalid type", nameof(type));
 
             var result = Activator.CreateInstance(type) as DataElement;
-
             return (DataElement)
                 ((RealProxy)
                     Activator.CreateInstance(typeof (DataElementProxy<>).MakeGenericType(result.GetType()), result))
                     .GetTransparentProxy();
         }
 
+        #endregion
+
+        #region Internal data accessors
 
         internal void FillWithData(IDictionary<string, object> data)
         {
@@ -107,42 +270,8 @@ namespace ParkitectNexus.AssetMagic.Data
 
             foreach (var pair in data)
             {
-                var propertyInfo = GetType().GetProperties().FirstOrDefault(p => p.GetDataElementName() == pair.Key);
-
-                if (propertyInfo == null)
-                    continue;
-
-                if (propertyInfo.PropertyType == typeof (DateTime))
-                {
-                    var value = (long) pair.Value;
-                    propertyInfo.SetValue(this, new DateTime(value));
-                }
-                else if (typeof (DataElement).IsAssignableFrom(propertyInfo.PropertyType))
-                {
-                    var value = pair.Value as IDictionary<string, object>;
-
-                    if (value != null)
-                    {
-                        var result = CreateProxyForType(propertyInfo.PropertyType);
-                        result.FillWithData(value);
-                        propertyInfo.SetValue(this, result);
-                    }
-                }
-                else if (DefaultTypes.Contains(propertyInfo.PropertyType))
-                {
-                    try
-                    {
-                        propertyInfo.SetValue(this, pair.Value);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine($"{propertyInfo}: {e.Message}");
-                    }
-                }
-                else
-                {
-                    throw new Exception("Unsupported type");
-                }
+                var propertyInfo = GetPropertyForKey(pair.Key);
+                GetPropertyForKey(pair.Key)?.SetValue(this, MapValueToType(pair.Value, propertyInfo.PropertyType));
             }
         }
 
@@ -169,5 +298,7 @@ namespace ParkitectNexus.AssetMagic.Data
                 throw new Exception("Unsupported type");
             }
         }
+
+        #endregion
     }
 }

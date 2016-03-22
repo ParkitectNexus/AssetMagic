@@ -16,7 +16,7 @@
 using System.Drawing;
 using ParkitectNexus.AssetMagic.Data.Savegames;
 
-namespace ParkitectNexus.AssetMagic.Converters
+namespace ParkitectNexus.AssetMagic
 {
     public interface ISavegame : ISaveFile
     {

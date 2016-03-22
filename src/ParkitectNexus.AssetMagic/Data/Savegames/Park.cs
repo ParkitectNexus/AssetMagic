@@ -13,11 +13,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using ParkitectNexus.AssetMagic.Data.Attributes;
+
 namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
     public class Park : DataElement
     {
-        public int Id { get; set; }
+        [Data("@id")]
+        public string Id { get; set; }
 
         public ParkInfo ParkInfo { get; set; }
 
@@ -27,13 +30,13 @@ namespace ParkitectNexus.AssetMagic.Data.Savegames
 
         public string Guid { get; set; }
 
-        public int SpawnedAtTime { get; set; }
+        public long SpawnedAtTime { get; set; }
 
-        public int XSize { get; set; }
+        public long XSize { get; set; }
 
-        public int ZSize { get; set; }
+        public long ZSize { get; set; }
 
-        public int YSize { get; set; }
+        public long YSize { get; set; }
 
 //        public object JobAgency { get; set; }
 //        public object Zones { get; set; }

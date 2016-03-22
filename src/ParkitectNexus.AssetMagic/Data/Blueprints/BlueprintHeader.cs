@@ -22,8 +22,14 @@ namespace ParkitectNexus.AssetMagic.Data.Blueprints
     {
         public string Name { get; set; }
 
-        public string[] ContentTypes { get; set; }
+        public double ApproximateCost { get; set; }
 
-        public string ContentType => ContentTypes?.FirstOrDefault();
+        public string ManufacturerName { get; set; }
+
+        public string[] Types { get; set; }
+        public string[] TrackedRideTypes { get; set; }
+        public string[] FlatRideTypes { get; set; }
+        public string[] DecoTypes { get; set; }
+        public ActiveModEntry[] ActiveMods { get; set; }
     }
 }

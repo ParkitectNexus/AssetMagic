@@ -16,12 +16,11 @@
 using System.Collections.Generic;
 using ParkitectNexus.AssetMagic.Data;
 
-namespace ParkitectNexus.AssetMagic.Converters
+namespace ParkitectNexus.AssetMagic
 {
     public interface ISaveFile
     {
         IEnumerable<IDataElement> Data { get; }
-
         T GetElement<T>() where T : IDataElement;
         IEnumerable<T> GetElements<T>() where T : IDataElement;
     }

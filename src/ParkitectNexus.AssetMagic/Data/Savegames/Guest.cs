@@ -17,70 +17,70 @@ namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
     public class Guest : DataElement
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        public float[] Position { get; set; }
+        public double[] Position { get; set; }
 
-        public float[] Rotation { get; set; }
+        public double[] Rotation { get; set; }
 
 //        [Data("@c")]
 //        public object C { get; set; }
 
-        public int TilesWalked { get; set; }
+        public long TilesWalked { get; set; }
 
-        public int GuestNumber { get; set; }
+        public long GuestNumber { get; set; }
 
-        public float MoneySpent { get; set; }
+        public double MoneySpent { get; set; }
 
-        public int ParkEnterTime { get; set; }
+        public long ParkEnterTime { get; set; }
 
-        public float Happiness { get; set; }
+        public double Happiness { get; set; }
 
-        public float Tiredness { get; set; }
+        public double Tiredness { get; set; }
 
-        public float Hunger { get; set; }
+        public double Hunger { get; set; }
 
-        public float Thirst { get; set; }
+        public double Thirst { get; set; }
 
-        public float ToiletUrgency { get; set; }
+        public double ToiletUrgency { get; set; }
 
-        public float Nausea { get; set; }
+        public double Nausea { get; set; }
 
-        public float NauseaTolerance { get; set; }
+        public double NauseaTolerance { get; set; }
 
-        public float SugarBoost { get; set; }
+        public double SugarBoost { get; set; }
 
-        public float Money { get; set; }
+        public double Money { get; set; }
 
-        public float MinIntensity { get; set; }
+        public double MinIntensity { get; set; }
 
-        public float MaxIntensity { get; set; }
+        public double MaxIntensity { get; set; }
 
-        public float Patience { get; set; }
+        public double Patience { get; set; }
 
-        public float Grumpiness { get; set; }
+        public double Grumpiness { get; set; }
 
-        public float Tidiness { get; set; }
+        public double Tidiness { get; set; }
 
-        public float Generosity { get; set; }
+        public double Generosity { get; set; }
 
-        public int SpawnedAtTime { get; set; }
+        public long SpawnedAtTime { get; set; }
 
-        public float DirtEncountered { get; set; }
+        public double DirtEncountered { get; set; }
 
-        public float ParkEntranceFeePaid { get; set; }
+        public double ParkEntranceFeePaid { get; set; }
 
-        public float LastMoneySpentTime { get; set; }
+        public double LastMoneySpentTime { get; set; }
 
-        public float TiredStartTime { get; set; }
+        public double TiredStartTime { get; set; }
 
-        public float AngryStartTime { get; set; }
+        public double AngryStartTime { get; set; }
 
-        public float PriceSatisfactionSum { get; set; }
+        public double PriceSatisfactionSum { get; set; }
 
-        public int PriceSatisfactionCount { get; set; }
+        public long PriceSatisfactionCount { get; set; }
 
-        public float HappinessBeforeEnteringAttraction { get; set; }
+        public double HappinessBeforeEnteringAttraction { get; set; }
 
 //        public object ExperienceLog { get; set; }
 
@@ -90,28 +90,28 @@ namespace ParkitectNexus.AssetMagic.Data.Savegames
 
         public string Nickname { get; set; }
 
-        public int Seed { get; set; }
+        public long Seed { get; set; }
 
         public string Gender { get; set; }
 
-        public int Headstyle { get; set; }
+        public long Headstyle { get; set; }
 
-        public int Torsostyle { get; set; }
+        public long Torsostyle { get; set; }
 
-        public int Legsstyle { get; set; }
+        public long Legsstyle { get; set; }
 
-        public int Hairstyle { get; set; }
+        public long Hairstyle { get; set; }
 
-        public int Eyesstyle { get; set; }
+        public long Eyesstyle { get; set; }
 
-        public int Browsstyle { get; set; }
+        public long Browsstyle { get; set; }
 
-        public int UniqueID { get; set; }
+        public long UniqueID { get; set; }
 
         public bool TriggerExperienceNotifications { get; set; }
 
 //        public object Behaviour { get; set; }
 
-        public int[] Inventory { get; set; }
+        public long[] Inventory { get; set; }
     }
 }

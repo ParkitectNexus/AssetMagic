@@ -17,17 +17,17 @@ namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
     public class ParkInfo : DataElement
     {
-        public float Money { get; set; }
+        public double Money { get; set; }
 
-        public int GuestsLeftCount { get; set; }
+        public long GuestsLeftCount { get; set; }
 
-        public float ParkEntranceFee { get; set; }
+        public double ParkEntranceFee { get; set; }
 
-        public float RatingPriceSatisfaction { get; set; }
+        public double RatingPriceSatisfaction { get; set; }
 
-        public float RatingCleanliness { get; set; }
+        public double RatingCleanliness { get; set; }
 
-        public float RatingHappiness { get; set; }
+        public double RatingHappiness { get; set; }
 
         public string Transactions { get; set; }
     }

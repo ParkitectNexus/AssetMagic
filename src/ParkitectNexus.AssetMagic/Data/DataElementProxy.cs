@@ -35,13 +35,7 @@ namespace ParkitectNexus.AssetMagic.Data
             if (instance == null) throw new ArgumentNullException(nameof(instance));
             _instance = instance;
         }
-
-        public static T Create(T instance)
-        {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
-            return (T) new DataElementProxy<T>(instance).GetTransparentProxy();
-        }
-
+        
         #region Overrides of RealProxy
 
         /// <summary>

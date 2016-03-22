@@ -19,15 +19,15 @@ namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
     public class SavegameHeader : FileHeader
     {
-        public int ParkDate { get; set; }
+        public long ParkDate { get; set; }
 
-        public float Money { get; set; }
+        public double Money { get; set; }
 
-        public int GuestCount { get; set; }
+        public long GuestCount { get; set; }
 
-        public float ParkRating { get; set; }
+        public double ParkRating { get; set; }
 
-        public float TimePlayed { get; set; }
+        public double TimePlayed { get; set; }
 
         public string Name { get; set; }
 
