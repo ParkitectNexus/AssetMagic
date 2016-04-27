@@ -15,6 +15,7 @@
 
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
@@ -29,15 +30,35 @@ namespace ParkitectNexus.AssetMagic.Converters
         public static ISavegame DeserializeFromFile(string path)
         {
             if (path == null) throw new ArgumentNullException(nameof(path));
-            return Deserialize(File.ReadAllText(path));
+            return Deserialize(File.OpenRead(path));
         }
 
         public static ISavegame Deserialize(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
+
+            if (stream.Position != 0)
+                stream.Seek(0, SeekOrigin.Begin);
+
+            var checkBuffer = new byte[2];
+            stream.Read(checkBuffer, 0, 2);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            if (checkBuffer.SequenceEqual(new byte[] {0x1f, 0x8b}))
+            {
+                using (var gZipStream = new GZipStream(stream, CompressionMode.Decompress))
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        gZipStream.CopyTo(memoryStream);
+                        return Deserialize(Encoding.UTF8.GetString(memoryStream.ToArray()));
+                    }
+                }
+            }
+
             if (stream is MemoryStream)
             {
-                var memoryStream = stream as MemoryStream;
+                var memoryStream = (MemoryStream) stream;
                 return Deserialize(Encoding.UTF8.GetString(memoryStream.ToArray()));
             }
 
@@ -51,21 +72,31 @@ namespace ParkitectNexus.AssetMagic.Converters
         public static ISavegame Deserialize(string data)
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
-            var savegame = new Savegame(data.GetFilledLines().Select(DataElement.Parse).ToArray());
+            try
+            {
+                var savegame = new Savegame(data.GetFilledLines().Select(DataElement.Parse).ToArray());
 
-            if (savegame.Header == null)
-                throw new InvalidSavegameException("SavegameHeader is missing");
-            if (savegame.Park == null)
-                throw new InvalidSavegameException("Park is missing");
+                if (savegame.Header == null)
+                    throw new InvalidSavegameException("SavegameHeader is missing");
+                if (savegame.Park == null)
+                    throw new InvalidSavegameException("Park is missing");
 
-            return savegame;
+                return savegame;
+            }
+            catch (Exception e)
+            {
+                throw e is InvalidSavegameException 
+                    ? e 
+                    : new InvalidSavegameException("Invalid savegame", e);
+            }
         }
 
         public static void SerializeToFile(ISavegame savegame, string path)
         {
             if (savegame == null) throw new ArgumentNullException(nameof(savegame));
             if (path == null) throw new ArgumentNullException(nameof(path));
-            File.WriteAllText(path, SerializeToString(savegame));
+
+            SerializeToStream(savegame, File.Open(path, FileMode.Create), Path.GetExtension(path) == ".park");
         }
 
         public static string SerializeToString(ISavegame savegame)
@@ -80,14 +111,22 @@ namespace ParkitectNexus.AssetMagic.Converters
             return string.Concat(savegame.Data.Select(d => JsonConvert.SerializeObject((d as DataElement).Data, settings) + "\r\n"));
         }
 
-        public static void SerializeToStream(ISavegame savegame, Stream stream)
+        public static void SerializeToStream(ISavegame savegame, Stream stream, bool compress = true)
         {
             if (savegame == null) throw new ArgumentNullException(nameof(savegame));
             if (stream == null) throw new ArgumentNullException(nameof(stream));
-            using (var streamWriter = new StreamWriter(stream))
-            {
-                streamWriter.Write(SerializeToString(savegame));
-            }
+
+            if (compress)
+                using (var gZipStream = new GZipStream(stream, CompressionLevel.Optimal))
+                using (var streamWriter = new StreamWriter(gZipStream))
+                {
+                    streamWriter.Write(SerializeToString(savegame));
+                }
+            else
+                using (var streamWriter = new StreamWriter(stream))
+                {
+                    streamWriter.Write(SerializeToString(savegame));
+                }
         }
     }
 }

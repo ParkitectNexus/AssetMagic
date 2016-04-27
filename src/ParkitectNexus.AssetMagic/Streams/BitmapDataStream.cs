@@ -63,7 +63,7 @@ namespace ParkitectNexus.AssetMagic.Streams
                 ClearBuffer();
             }
         }
-
+        
         private void ClearBuffer()
         {
             _index = 0;

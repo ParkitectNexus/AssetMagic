@@ -14,9 +14,11 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using ParkitectNexus.AssetMagic.Converters;
 using ParkitectNexus.AssetMagic.Data;
 
@@ -24,11 +26,18 @@ namespace ParkitectNexus.AssetMagic.Debug
 {
     internal class Program
     {
+        private static string Join(params string[] values)
+        {
+            if (values == null)
+                return string.Empty;
+
+            return string.Join(", ", values);
+        }
         private static void Main(string[] args)
         {
             Console.WriteLine("\n\nBLUEPRINTS:");
 
-            var path = @"..\..\..\..\tests\blueprints\test-pa9.png";
+            var path = @"..\..\..\..\tests\blueprints\loggers-revenge.png";
             var bp = BlueprintConverter.DeserializeFromFile(path);
 
 //            Console.WriteLine(BlueprintConverter.ReadFromImage(Image.FromFile(path)));
@@ -46,18 +55,25 @@ namespace ParkitectNexus.AssetMagic.Debug
             Console.WriteLine($"SavegameVersion: {bp.Header.SavegameVersion}");
             Console.WriteLine($"Type: {bp.Header.Type}");
             Console.WriteLine($"ApproximateCost: {bp.Header.ApproximateCost}");
-            Console.WriteLine($"Types: [{string.Join(", ", bp.Header.Types)}]");
-            Console.WriteLine($"DecoTypes: [{string.Join(", ", bp.Header.DecoTypes)}]");
-            Console.WriteLine($"FlatRideTypes: [{string.Join(", ", bp.Header.FlatRideTypes)}]");
-            Console.WriteLine($"TrackedRideTypes: [{string.Join(", ", bp.Header.TrackedRideTypes)}]");
+            Console.WriteLine($"Types: [{Join(bp.Header.Types)}]");
+            Console.WriteLine($"DecoTypes: [{Join(bp.Header.DecoTypes)}]");
+            Console.WriteLine($"FlatRideTypes: [{Join( bp.Header.FlatRideTypes)}]");
+            Console.WriteLine($"TrackedRideTypes: [{Join(bp.Header.TrackedRideTypes)}]");
 
             Console.WriteLine("\n\nSAVEGAMES:");
 
-            var path2 = @"..\..\..\..\tests\parks\test-pa9.txt";
+            var path2 = @"..\..\..\..\tests\parks\compressed.park";
             var sg = SavegameConverter.DeserializeFromFile(path2);
 
-            Console.WriteLine("Rewriting to same content? {0}",
-                SavegameConverter.SerializeToString(sg) == File.ReadAllText(path2));
+            byte[] bytes;
+            using (var ms = new MemoryStream())
+            {
+                SavegameConverter.SerializeToStream(sg, ms);
+                bytes = ms.ToArray();
+            }
+
+            SavegameConverter.SerializeToFile(sg, path2.Replace(".park", "back.park"));
+            Console.WriteLine("Rewriting to same content? {0}", bytes.SequenceEqual(File.ReadAllBytes(path2)));
 
             PrintUnmappedProperties(sg.Header);
             PrintUnmappedProperties(sg.Park);

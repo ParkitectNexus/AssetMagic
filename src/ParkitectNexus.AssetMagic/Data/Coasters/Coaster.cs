@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using ParkitectNexus.AssetMagic.Data.Attributes;
+
 namespace ParkitectNexus.AssetMagic.Data.Coasters
 {
     [DataElement("(.*Coaster|WildMouse|MiniatureRailway|SuspendedMonorail|LogFlume)")]

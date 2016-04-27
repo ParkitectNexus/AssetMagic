@@ -1,4 +1,4 @@
-﻿// ParkitectNexus.AssetMagic
+// ParkitectNexus.AssetMagic
 // Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,15 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using ParkitectNexus.AssetMagic.Data.Attributes;
-
-namespace ParkitectNexus.AssetMagic.Data.Generic
+namespace ParkitectNexus.AssetMagic.Data
 {
-    [DataElement(@"FileHeader\+ActiveModEntry")]
-    public class ActiveModEntry : DataElement
+    public interface IDataElement
     {
-        public string Identifier { get; set; }
-
-        public string Name { get; set; }
+        string Type { get; set; }
     }
 }

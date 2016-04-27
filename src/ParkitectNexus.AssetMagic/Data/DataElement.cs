@@ -29,12 +29,6 @@ using ParkitectNexus.AssetMagic.Utilities;
 
 namespace ParkitectNexus.AssetMagic.Data
 {
-    public interface IDataElement
-    {
-        string Type { get; set; }
-    }
-
-
     public class DataElement : MarshalByRefObject, IDataElement
     {
         private static readonly Type[] DefaultTypes =

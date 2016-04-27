@@ -15,7 +15,7 @@
 
 using System;
 
-namespace ParkitectNexus.AssetMagic.Data
+namespace ParkitectNexus.AssetMagic.Data.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class DataElementAttribute : Attribute
