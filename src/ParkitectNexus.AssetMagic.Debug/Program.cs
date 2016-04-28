@@ -61,19 +61,19 @@ namespace ParkitectNexus.AssetMagic.Debug
             Console.WriteLine($"TrackedRideTypes: [{Join(bp.Header.TrackedRideTypes)}]");
 
             Console.WriteLine("\n\nSAVEGAMES:");
-
-            var path2 = @"..\..\..\..\tests\parks\compressed.park";
+            //var path2 = @"..\..\..\..\tests\parks\compressed.park";
+            var path2 = @"..\..\..\..\tests\parks\unnamed-park.txt";
             var sg = SavegameConverter.DeserializeFromFile(path2);
 
-            byte[] bytes;
-            using (var ms = new MemoryStream())
-            {
-                SavegameConverter.SerializeToStream(sg, ms);
-                bytes = ms.ToArray();
-            }
-
-            SavegameConverter.SerializeToFile(sg, path2.Replace(".park", "back.park"));
-            Console.WriteLine("Rewriting to same content? {0}", bytes.SequenceEqual(File.ReadAllBytes(path2)));
+//            byte[] bytes;
+//            using (var ms = new MemoryStream())
+//            {
+//                SavegameConverter.SerializeToStream(sg, ms);
+//                bytes = ms.ToArray();
+//            }
+//
+////            SavegameConverter.SerializeToFile(sg, path2.Replace(".park", "back.park"));
+//            Console.WriteLine("Rewriting to same content? {0}", bytes.SequenceEqual(File.ReadAllBytes(path2)));
 
             PrintUnmappedProperties(sg.Header);
             PrintUnmappedProperties(sg.Park);

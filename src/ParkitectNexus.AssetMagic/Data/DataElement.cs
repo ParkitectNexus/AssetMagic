@@ -152,8 +152,24 @@ namespace ParkitectNexus.AssetMagic.Data
                     return result;
                 }
             }
+            if (value is string)
+            {
+                if (type == typeof (int))
+                {
+                    int output;
+                    if (int.TryParse((string) value, out output))
+                        return output;
+                }
+                if (type == typeof(double))
+                {
+                    double output;
+                    if (double.TryParse((string)value, out output))
+                        return output;
+                }
+            }
+            //            throw new Exception($"Unsupported type conversion `{value?.GetType()}` => `{type}`");
 
-            throw new Exception("Unsupported type");
+            return type.IsValueType ? Activator.CreateInstance(type) : null;
         }
 
         private object UnmapValueFromType(object value, Type type)
