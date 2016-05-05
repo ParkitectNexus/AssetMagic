@@ -17,7 +17,7 @@ using ParkitectNexus.AssetMagic.Data.Attributes;
 
 namespace ParkitectNexus.AssetMagic.Data.Coasters
 {
-    [DataElement("(.*Coaster|WildMouse|MiniatureRailway|SuspendedMonorail|LogFlume)")]
+    [DataElement("(.*Coaster|WildMouse|MiniatureRailway|Monorail|SuspendedMonorail|LogFlume)")]
     public class Coaster : DataElement
     {
         public int Id { get; set; }

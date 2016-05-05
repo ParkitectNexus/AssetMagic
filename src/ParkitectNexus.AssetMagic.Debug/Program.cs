@@ -21,6 +21,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using ParkitectNexus.AssetMagic.Converters;
 using ParkitectNexus.AssetMagic.Data;
+using ParkitectNexus.AssetMagic.Data.Coasters;
 
 namespace ParkitectNexus.AssetMagic.Debug
 {
@@ -37,7 +38,7 @@ namespace ParkitectNexus.AssetMagic.Debug
         {
             Console.WriteLine("\n\nBLUEPRINTS:");
 
-            var path = @"..\..\..\..\tests\blueprints\loggers-revenge.png";
+            var path = @"..\..\..\..\tests\blueprints\monorail.png";
             var bp = BlueprintConverter.DeserializeFromFile(path);
 
 //            Console.WriteLine(BlueprintConverter.ReadFromImage(Image.FromFile(path)));
@@ -59,7 +60,7 @@ namespace ParkitectNexus.AssetMagic.Debug
             Console.WriteLine($"DecoTypes: [{Join(bp.Header.DecoTypes)}]");
             Console.WriteLine($"FlatRideTypes: [{Join( bp.Header.FlatRideTypes)}]");
             Console.WriteLine($"TrackedRideTypes: [{Join(bp.Header.TrackedRideTypes)}]");
-
+            Console.WriteLine($"Coaster.Type: {bp.GetElement<Coaster>()?.Type}");
             Console.WriteLine("\n\nSAVEGAMES:");
             //var path2 = @"..\..\..\..\tests\parks\compressed.park";
             var path2 = @"..\..\..\..\tests\parks\unnamed-park.txt";
