@@ -1,4 +1,4 @@
-// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetMagic
 // Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,14 +17,18 @@ using System;
 
 namespace ParkitectNexus.AssetMagic.Data.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class DataElementAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public class WrapPropertyAttribute : Attribute
     {
-        public DataElementAttribute(string pattern)
+        public WrapPropertyAttribute()
         {
-            Pattern = pattern;
         }
 
-        public string Pattern { get; }
+        public WrapPropertyAttribute(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
     }
 }

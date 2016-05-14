@@ -13,10 +13,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.CodeDom;
+
 namespace ParkitectNexus.AssetMagic.Data
 {
-    public interface IDataElement
+    public interface IDataWrapper
     {
         string Type { get; set; }
+
+        T Cast<T>() where T : class, IDataWrapper;
+        object Get(Type type, string key);
+        void Set(string key, object value);
     }
 }

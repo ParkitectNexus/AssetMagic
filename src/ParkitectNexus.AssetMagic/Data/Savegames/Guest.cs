@@ -13,105 +13,152 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using ParkitectNexus.AssetMagic.Data.Attributes;
+
 namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
-    public class Guest : DataElement
+    public class Guest : DataWrapper
     {
-        public long Id { get; set; }
+        [WrapProperty]
+        public virtual long Id { get; set; }
 
-        public double[] Position { get; set; }
+        [WrapProperty]
+        public virtual double[] Position { get; set; }
 
-        public double[] Rotation { get; set; }
+        [WrapProperty]
+        public virtual double[] Rotation { get; set; }
 
-//        [Data("@c")]
-//        public object C { get; set; }
+        //        [Data("@c")]
+        //        public virtual object C { get; set; }
 
-        public long TilesWalked { get; set; }
+        [WrapProperty]
+        public virtual long TilesWalked { get; set; }
 
-        public long GuestNumber { get; set; }
+        [WrapProperty]
+        public virtual long GuestNumber { get; set; }
 
-        public double MoneySpent { get; set; }
+        [WrapProperty]
+        public virtual double MoneySpent { get; set; }
 
-        public long ParkEnterTime { get; set; }
+        [WrapProperty]
+        public virtual long ParkEnterTime { get; set; }
 
-        public double Happiness { get; set; }
+        [WrapProperty]
+        public virtual double Happiness { get; set; }
 
-        public double Tiredness { get; set; }
+        [WrapProperty]
+        public virtual double Tiredness { get; set; }
 
-        public double Hunger { get; set; }
+        [WrapProperty]
+        public virtual double Hunger { get; set; }
 
-        public double Thirst { get; set; }
+        [WrapProperty]
+        public virtual double Thirst { get; set; }
 
-        public double ToiletUrgency { get; set; }
+        [WrapProperty]
+        public virtual double ToiletUrgency { get; set; }
 
-        public double Nausea { get; set; }
+        [WrapProperty]
+        public virtual double Nausea { get; set; }
 
-        public double NauseaTolerance { get; set; }
+        [WrapProperty]
+        public virtual double NauseaTolerance { get; set; }
 
-        public double SugarBoost { get; set; }
+        [WrapProperty]
+        public virtual double SugarBoost { get; set; }
 
-        public double Money { get; set; }
+        [WrapProperty]
+        public virtual double Money { get; set; }
 
-        public double MinIntensity { get; set; }
+        [WrapProperty]
+        public virtual double MinIntensity { get; set; }
 
-        public double MaxIntensity { get; set; }
+        [WrapProperty]
+        public virtual double MaxIntensity { get; set; }
 
-        public double Patience { get; set; }
+        [WrapProperty]
+        public virtual double Patience { get; set; }
 
-        public double Grumpiness { get; set; }
+        [WrapProperty]
+        public virtual double Grumpiness { get; set; }
 
-        public double Tidiness { get; set; }
+        [WrapProperty]
+        public virtual double Tidiness { get; set; }
 
-        public double Generosity { get; set; }
+        [WrapProperty]
+        public virtual double Generosity { get; set; }
 
-        public long SpawnedAtTime { get; set; }
+        [WrapProperty]
+        public virtual long SpawnedAtTime { get; set; }
 
-        public double DirtEncountered { get; set; }
+        [WrapProperty]
+        public virtual double DirtEncountered { get; set; }
 
-        public double ParkEntranceFeePaid { get; set; }
+        [WrapProperty]
+        public virtual double ParkEntranceFeePaid { get; set; }
 
-        public double LastMoneySpentTime { get; set; }
+        [WrapProperty]
+        public virtual double LastMoneySpentTime { get; set; }
 
-        public double TiredStartTime { get; set; }
+        [WrapProperty]
+        public virtual double TiredStartTime { get; set; }
 
-        public double AngryStartTime { get; set; }
+        [WrapProperty]
+        public virtual double AngryStartTime { get; set; }
 
-        public double PriceSatisfactionSum { get; set; }
+        [WrapProperty]
+        public virtual double PriceSatisfactionSum { get; set; }
 
-        public long PriceSatisfactionCount { get; set; }
+        [WrapProperty]
+        public virtual long PriceSatisfactionCount { get; set; }
 
-        public double HappinessBeforeEnteringAttraction { get; set; }
+        [WrapProperty]
+        public virtual double HappinessBeforeEnteringAttraction { get; set; }
 
-//        public object ExperienceLog { get; set; }
+        //        public virtual object ExperienceLog { get; set; }
 
-        public string Forename { get; set; }
+        [WrapProperty]
+        public virtual string Forename { get; set; }
 
-        public string Surname { get; set; }
+        [WrapProperty]
+        public virtual string Surname { get; set; }
 
-        public string Nickname { get; set; }
+        [WrapProperty]
+        public virtual string Nickname { get; set; }
 
-        public long Seed { get; set; }
+        [WrapProperty]
+        public virtual long Seed { get; set; }
 
-        public string Gender { get; set; }
+        [WrapProperty]
+        public virtual string Gender { get; set; }
 
-        public long Headstyle { get; set; }
+        [WrapProperty]
+        public virtual long Headstyle { get; set; }
 
-        public long Torsostyle { get; set; }
+        [WrapProperty]
+        public virtual long Torsostyle { get; set; }
 
-        public long Legsstyle { get; set; }
+        [WrapProperty]
+        public virtual long Legsstyle { get; set; }
 
-        public long Hairstyle { get; set; }
+        [WrapProperty]
+        public virtual long Hairstyle { get; set; }
 
-        public long Eyesstyle { get; set; }
+        [WrapProperty]
+        public virtual long Eyesstyle { get; set; }
 
-        public long Browsstyle { get; set; }
+        [WrapProperty]
+        public virtual long Browsstyle { get; set; }
 
-        public long UniqueID { get; set; }
+        [WrapProperty]
+        public virtual long UniqueID { get; set; }
 
-        public bool TriggerExperienceNotifications { get; set; }
+        [WrapProperty]
+        public virtual bool TriggerExperienceNotifications { get; set; }
 
-//        public object Behaviour { get; set; }
+        //        public virtual object Behaviour { get; set; }
 
-        public long[] Inventory { get; set; }
+        [WrapProperty]
+        public virtual long[] Inventory { get; set; }
     }
 }

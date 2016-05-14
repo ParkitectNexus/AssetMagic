@@ -13,12 +13,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using ParkitectNexus.AssetMagic.Data.Blueprints;
+using ParkitectNexus.AssetMagic.Data.Coasters;
 
 namespace ParkitectNexus.AssetMagic
 {
     public interface IBlueprint : ISaveFile
     {
         BlueprintHeader Header { get; }
+
+        IEnumerable<Coaster> Coasters { get; } 
     }
 }

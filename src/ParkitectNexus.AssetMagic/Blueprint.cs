@@ -14,29 +14,26 @@
 // limitations under the License.
 
 using System.Collections.Generic;
+using System.Linq;
 using ParkitectNexus.AssetMagic.Data;
 using ParkitectNexus.AssetMagic.Data.Blueprints;
 using ParkitectNexus.AssetMagic.Data.Coasters;
 
-namespace ParkitectNexus.AssetMagic.Converters
+namespace ParkitectNexus.AssetMagic
 {
     public class Blueprint : SaveFile, IBlueprint
     {
-        private readonly IEnumerable<IDataElement> _data;
-
-        public Blueprint(IEnumerable<IDataElement> data) : base(data)
+        public Blueprint(IEnumerable<IDataWrapper> data) : base(data)
         {
-            _data = data;
-
-            Header = GetElement<BlueprintHeader>();
-            Coaster = GetElement<Coaster>();
+            Header = GetDataWithType<BlueprintHeader>();
+            Coasters = GetDataWithTypes(Header.TrackedRideTypes ?? Header.Types).Select(d => d.Cast<Coaster>());
         }
-
+        
         #region Implementation of IBlueprint
 
-        public virtual BlueprintHeader Header { get; }
+        public BlueprintHeader Header { get; }
 
-        public virtual Coaster Coaster { get; }
+        public IEnumerable<Coaster> Coasters { get; }
 
         #endregion
     }

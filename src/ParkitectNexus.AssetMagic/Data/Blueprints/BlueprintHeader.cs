@@ -1,4 +1,4 @@
-﻿// ParkitectNexus.AssetMagic
+﻿// ParkitectNexus.AssetTools
 // Copyright 2016 Tim Potze
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,23 +13,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Linq;
+using ParkitectNexus.AssetMagic.Data.Attributes;
 using ParkitectNexus.AssetMagic.Data.Generic;
 
 namespace ParkitectNexus.AssetMagic.Data.Blueprints
 {
     public class BlueprintHeader : FileHeader
     {
-        public string Name { get; set; }
+        [WrapProperty]
+        public virtual string Name { get; set; }
 
-        public double ApproximateCost { get; set; }
+        [WrapProperty]
+        public virtual double ApproximateCost { get; set; }
 
-        public string ManufacturerName { get; set; }
+        [WrapProperty]
+        public virtual string ManufacturerName { get; set; }
 
-        public string[] Types { get; set; }
-        public string[] TrackedRideTypes { get; set; }
-        public string[] FlatRideTypes { get; set; }
-        public string[] DecoTypes { get; set; }
-        public ActiveModEntry[] ActiveMods { get; set; }
+        [WrapProperty]
+        public virtual string[] Types { get; set; }
+
+        [WrapProperty]
+        public virtual string[] TrackedRideTypes { get; set; }
+
+        [WrapProperty]
+        public virtual string[] FlatRideTypes { get; set; }
+
+        [WrapProperty]
+        public virtual string[] DecoTypes { get; set; }
+
+        [WrapProperty]
+        public virtual ActiveModEntry[] ActiveMods { get; set; }
     }
 }

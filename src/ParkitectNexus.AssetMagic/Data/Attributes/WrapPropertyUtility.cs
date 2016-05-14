@@ -18,12 +18,12 @@ using System.Reflection;
 
 namespace ParkitectNexus.AssetMagic.Data.Attributes
 {
-    public static class DataAttributeUtility
+    public static class WrapPropertyUtility
     {
-        public static string GetDataElementName(this PropertyInfo propertyInfo)
+        public static string GetWrappedPropertyName(this PropertyInfo propertyInfo)
         {
             if (propertyInfo == null) throw new ArgumentNullException(nameof(propertyInfo));
-            var attribute = propertyInfo.GetCustomAttribute<DataAttribute>();
+            var attribute = propertyInfo.GetCustomAttribute<WrapPropertyAttribute>();
             var name = char.ToLowerInvariant(propertyInfo.Name[0]) + propertyInfo.Name.Substring(1);
 
             if (attribute?.Name != null)

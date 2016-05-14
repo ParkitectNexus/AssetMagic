@@ -13,10 +13,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using ParkitectNexus.AssetMagic.Data.Attributes;
+
 namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
-    public class ParkSettings : DataElement
+    public class ParkSettings : DataWrapper
     {
-        public bool ResourcesEnabled { get; set; }
+        [WrapProperty]
+        public virtual bool ResourcesEnabled { get; set; }
     }
 }

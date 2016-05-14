@@ -74,7 +74,7 @@ namespace ParkitectNexus.AssetMagic.Converters
             if (data == null) throw new ArgumentNullException(nameof(data));
             try
             {
-                var savegame = new Savegame(data.GetFilledLines().Select(DataElement.Parse).ToArray());
+                var savegame = new Savegame(data.GetFilledLines().Select(DataWrapper.Parse).ToArray());
 
                 if (savegame.Header == null)
                     throw new InvalidSavegameException("SavegameHeader is missing");
@@ -108,7 +108,7 @@ namespace ParkitectNexus.AssetMagic.Converters
                 ContractResolver = new MiniJsonContractResolver(),
                 Converters = new[] {new MiniJsonFloatConverter()}
             };
-            return string.Concat(savegame.Data.Select(d => JsonConvert.SerializeObject((d as DataElement).Data, settings) + "\r\n"));
+            return string.Concat(savegame.Data.Select(d => JsonConvert.SerializeObject((d as DataWrapper).Data, settings) + "\r\n"));
         }
 
         public static void SerializeToStream(ISavegame savegame, Stream stream, bool compress = true)

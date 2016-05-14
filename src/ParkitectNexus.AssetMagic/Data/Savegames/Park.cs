@@ -17,33 +17,43 @@ using ParkitectNexus.AssetMagic.Data.Attributes;
 
 namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
-    public class Park : DataElement
+    public class Park : DataWrapper
     {
-        [Data("@id")]
-        public string Id { get; set; }
+        [WrapProperty("@id")]
+        public virtual string Id { get; set; }
 
-        public ParkInfo ParkInfo { get; set; }
+        [WrapProperty]
+        public virtual ParkInfo ParkInfo { get; set; }
 
-        public ParkSettings Settings { get; set; }
+        [WrapProperty]
+        public virtual ParkSettings Settings { get; set; }
 
-        public string ParkName { get; set; }
+        [WrapProperty]
+        public virtual string ParkName { get; set; }
 
-        public string Guid { get; set; }
+        [WrapProperty]
+        public virtual string Guid { get; set; }
 
-        public long SpawnedAtTime { get; set; }
+        [WrapProperty]
+        public virtual long SpawnedAtTime { get; set; }
 
-        public long XSize { get; set; }
+        [WrapProperty]
+        public virtual long XSize { get; set; }
 
-        public long ZSize { get; set; }
+        [WrapProperty]
+        public virtual long ZSize { get; set; }
 
-        public long YSize { get; set; }
+        [WrapProperty]
+        public virtual long YSize { get; set; }
 
-//        public object JobAgency { get; set; }
-//        public object Zones { get; set; }
-        public bool SendGuestsHome { get; set; }
+        //        public virtual object JobAgency { get; set; }
+        //        public virtual object Zones { get; set; }
+        [WrapProperty]
+        public virtual bool SendGuestsHome { get; set; }
 
-        public string Patches { get; set; }
+        [WrapProperty]
+        public virtual string Patches { get; set; }
 
-//        public object EmployeeColors { get; set; }
+//        public virtual object EmployeeColors { get; set; }
     }
 }

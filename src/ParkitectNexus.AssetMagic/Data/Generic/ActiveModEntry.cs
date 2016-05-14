@@ -17,11 +17,13 @@ using ParkitectNexus.AssetMagic.Data.Attributes;
 
 namespace ParkitectNexus.AssetMagic.Data.Generic
 {
-    [DataElement(@"FileHeader\+ActiveModEntry")]
-    public class ActiveModEntry : DataElement
+    //[DataElement(@"FileHeader\+ActiveModEntry")]
+    public class ActiveModEntry : DataWrapper
     {
+        [WrapProperty]
         public string Identifier { get; set; }
 
+        [WrapProperty]
         public string Name { get; set; }
     }
 }

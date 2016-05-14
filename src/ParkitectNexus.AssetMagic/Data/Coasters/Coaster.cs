@@ -17,34 +17,44 @@ using ParkitectNexus.AssetMagic.Data.Attributes;
 
 namespace ParkitectNexus.AssetMagic.Data.Coasters
 {
-    [DataElement("(.*Coaster|WildMouse|MiniatureRailway|Monorail|SuspendedMonorail|LogFlume)")]
-    public class Coaster : DataElement
+    public class Coaster : DataWrapper
     {
-        public int Id { get; set; }
+        [WrapProperty]
+        public virtual int Id { get; set; }
 
-        public float[] Position { get; set; }
+        [WrapProperty]
+        public virtual float[] Position { get; set; }
 
-        public float[] Rotation { get; set; }
+        [WrapProperty]
+        public virtual float[] Rotation { get; set; }
 
-//        public object CarColors { get; set; }
+        //        public object CarColors { get; set; }
 
-//        public object TrackColors { get; set; }
+        //        public object TrackColors { get; set; }
 
-        public int Track { get; set; }
+        [WrapProperty]
+        public virtual int Track { get; set; }
 
-        public double EntranceFee { get; set; }
+        [WrapProperty]
+        public virtual double EntranceFee { get; set; }
 
-        public double Duration { get; set; }
+        [WrapProperty]
+        public virtual double Duration { get; set; }
 
-        public TrackedRideStats Stats { get; set; }
+        [WrapProperty]
+        public virtual TrackedRideStats Stats { get; set; }
 
-        public long TrainCount { get; set; }
+        [WrapProperty]
+        public virtual long TrainCount { get; set; }
 
-        public long TrainLength { get; set; }
+        [WrapProperty]
+        public virtual long TrainLength { get; set; }
 
-        public string CarType { get; set; }
+        [WrapProperty]
+        public virtual string CarType { get; set; }
 
-        public long WaitTime { get; set; }
+        [WrapProperty]
+        public virtual long WaitTime { get; set; }
 
         // TODO add remaining properties
     }

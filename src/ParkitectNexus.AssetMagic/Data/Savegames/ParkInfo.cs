@@ -13,22 +13,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using ParkitectNexus.AssetMagic.Data.Attributes;
+
 namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
-    public class ParkInfo : DataElement
+    public class ParkInfo : DataWrapper
     {
-        public double Money { get; set; }
+        [WrapProperty]
+        public virtual double Money { get; set; }
 
-        public long GuestsLeftCount { get; set; }
+        [WrapProperty]
+        public virtual long GuestsLeftCount { get; set; }
 
-        public double ParkEntranceFee { get; set; }
+        [WrapProperty]
+        public virtual double ParkEntranceFee { get; set; }
 
-        public double RatingPriceSatisfaction { get; set; }
+        [WrapProperty]
+        public virtual double RatingPriceSatisfaction { get; set; }
 
-        public double RatingCleanliness { get; set; }
+        [WrapProperty]
+        public virtual double RatingCleanliness { get; set; }
 
-        public double RatingHappiness { get; set; }
+        [WrapProperty]
+        public virtual double RatingHappiness { get; set; }
 
-        public string Transactions { get; set; }
+        [WrapProperty]
+        public virtual string Transactions { get; set; }
     }
 }

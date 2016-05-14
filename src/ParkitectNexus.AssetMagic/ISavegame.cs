@@ -24,7 +24,7 @@ namespace ParkitectNexus.AssetMagic
 
         Park Park { get; }
 
-        int GuestCount { get; }
+        long GuestCount { get; }
 
         Image Screenshot { get; }
     }

@@ -14,17 +14,22 @@
 // limitations under the License.
 
 using System;
+using ParkitectNexus.AssetMagic.Data.Attributes;
 
 namespace ParkitectNexus.AssetMagic.Data.Generic
 {
-    public class FileHeader : DataElement
+    public class FileHeader : DataWrapper
     {
-        public DateTime Date { get; set; }
+        [WrapProperty]
+        public virtual long Date { get; set; }
 
-        public long SavegameVersion { get; set; }
+        [WrapProperty]
+        public virtual long SavegameVersion { get; set; }
 
-        public long GameVersion { get; set; }
+        [WrapProperty]
+        public virtual long GameVersion { get; set; }
 
-        public string GameVersionName { get; set; }
+        [WrapProperty]
+        public virtual string GameVersionName { get; set; }
     }
 }

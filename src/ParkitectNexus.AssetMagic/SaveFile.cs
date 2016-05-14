@@ -13,6 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ParkitectNexus.AssetMagic.Data;
@@ -21,23 +22,35 @@ namespace ParkitectNexus.AssetMagic
 {
     public abstract class SaveFile : ISaveFile
     {
-        protected SaveFile(IEnumerable<IDataElement> data)
+        protected SaveFile(IEnumerable<IDataWrapper> data)
         {
             Data = data;
         }
 
         #region Implementation of ISaveFile
 
-        public virtual IEnumerable<IDataElement> Data { get; protected set; }
+        public virtual IEnumerable<IDataWrapper> Data { get; protected set; }
 
-        public virtual T GetElement<T>() where T : IDataElement
+        public IDataWrapper GetDataWithType(string type)
         {
-            return GetElements<T>().FirstOrDefault();
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            return Data.FirstOrDefault(d => d.Type == type);
         }
 
-        public virtual IEnumerable<T> GetElements<T>() where T : IDataElement
+        public T GetDataWithType<T>(string type) where T : class, IDataWrapper
         {
-            return Data.OfType<T>();
+            return GetDataWithType(type).Cast<T>();
+        }
+
+        public T GetDataWithType<T>() where T : class, IDataWrapper
+        {
+            return GetDataWithType(typeof(T).Name).Cast<T>();
+        }
+
+        public IEnumerable<IDataWrapper> GetDataWithTypes(params string[] types)
+        {
+            if (types == null) throw new ArgumentNullException(nameof(types));
+            return Data.Where(d => types.Contains(d.Type));
         }
 
         #endregion

@@ -20,8 +20,8 @@ namespace ParkitectNexus.AssetMagic
 {
     public interface ISaveFile
     {
-        IEnumerable<IDataElement> Data { get; }
-        T GetElement<T>() where T : IDataElement;
-        IEnumerable<T> GetElements<T>() where T : IDataElement;
+        IEnumerable<IDataWrapper> Data { get; }
+
+        IEnumerable<IDataWrapper> GetDataWithTypes(params string[] types);
     }
 }

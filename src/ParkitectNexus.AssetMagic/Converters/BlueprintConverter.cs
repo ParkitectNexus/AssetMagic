@@ -46,11 +46,8 @@ namespace ParkitectNexus.AssetMagic.Converters
         {
             if (data == null) throw new ArgumentNullException(nameof(data));
 
-            var blueprint = new Blueprint(data.GetFilledLines().Select(DataElement.Parse).ToArray());
-
-            if (blueprint.Header == null)
-                throw new InvalidBlueprintException("BlueprintHeader is missing");
-
+            var blueprint = new Blueprint(data.GetFilledLines().Select(DataWrapper.Parse).ToArray());
+            
             return blueprint;
         }
 
@@ -78,7 +75,7 @@ namespace ParkitectNexus.AssetMagic.Converters
                 ContractResolver = new MiniJsonContractResolver(),
                 Converters = new[] {new MiniJsonFloatConverter()}
             };
-            return string.Concat(blueprint.Data.Select(d => JsonConvert.SerializeObject((d as DataElement).Data, settings) + "\r\n"));
+            return string.Concat(blueprint.Data.Select(d => JsonConvert.SerializeObject((d as DataWrapper).Data, settings) + "\r\n"));
         }
 
         public static void SerializeToStream(IBlueprint blueprint, Image image, Stream stream)

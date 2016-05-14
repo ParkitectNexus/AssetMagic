@@ -13,26 +13,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using ParkitectNexus.AssetMagic.Data.Attributes;
 using ParkitectNexus.AssetMagic.Data.Generic;
 
 namespace ParkitectNexus.AssetMagic.Data.Savegames
 {
     public class SavegameHeader : FileHeader
     {
-        public long ParkDate { get; set; }
+        [WrapProperty]
+        public virtual long ParkDate { get; set; }
 
-        public double Money { get; set; }
+        [WrapProperty]
+        public virtual double Money { get; set; }
 
-        public long GuestCount { get; set; }
+        [WrapProperty]
+        public virtual long GuestCount { get; set; }
 
-        public double ParkRating { get; set; }
+        [WrapProperty]
+        public virtual double ParkRating { get; set; }
 
-        public double TimePlayed { get; set; }
+        [WrapProperty]
+        public virtual double TimePlayed { get; set; }
 
-        public string Name { get; set; }
+        [WrapProperty]
+        public virtual string Name { get; set; }
 
-        public string Screenshot { get; set; }
+        [WrapProperty]
+        public virtual string Screenshot { get; set; }
 
-        public ActiveModEntry[] ActiveMods { get; set; }
+        [WrapProperty]
+        public virtual ActiveModEntry[] ActiveMods { get; set; }
     }
 }
