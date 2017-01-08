@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A750FCAD-423F-4E79-9AD0-FE473F106386}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ParkitectNexus.AssetMagic.Test</RootNamespace>
+    <AssemblyName>ParkitectNexus.AssetMagic.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <HintPath>..\..\packages\nunit.framework.2.63.0\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Blueprints\DoubleSplashFallsSceneryTest.cs" />
+    <Compile Include="Blueprints\FireVortexArrowTest.cs" />
+    <Compile Include="Blueprints\HauntedManorTest.cs" />
+    <Compile Include="Blueprints\LoggersRevengeTest.cs" />
+    <Compile Include="Blueprints\MonorailTest.cs" />
+    <Compile Include="Blueprints\ShipwreckCove.cs" />
+    <Compile Include="Blueprints\TestCoasterTest.cs" />
+    <Compile Include="Blueprints\TestPa9Test.cs" />
+    <Compile Include="Blueprints\TestTest.cs" />
+    <Compile Include="Parks\CompressedBackTest.cs" />
+    <Compile Include="Parks\CompressedTest.cs" />
+    <Compile Include="Parks\DiscoveryKingdomTest.cs" />
+    <Compile Include="Parks\ParkitectPreAlpha6bTest.cs" />
+    <Compile Include="Parks\ParkTest.cs" />
+    <Compile Include="Parks\Scenarios\QuiLandTest.cs" />
+    <Compile Include="Parks\TestPa9Test.cs" />
+    <Compile Include="Parks\UnnamedParkTest.cs" />
+    <Compile Include="Blueprints\BlueprintTest.cs" />
+    <Compile Include="Blueprints\TeaCupsTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParkitectNexus.AssetMagic\ParkitectNexus.AssetMagic.csproj">
+      <Project>{AB184510-DD74-4304-A7FB-728A4220C7C4}</Project>
+      <Name>ParkitectNexus.AssetMagic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="files\blueprints\.directory" />
+    <Content Include="files\blueprints\double-splash-falls-scenery.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\fire-vortex-arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\haunted-manor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\invalid.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\loggers-revenge.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\monorail.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\shipwreck-cove.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\tea-cups.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\test-coaster.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\test-pa9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\blueprints\test.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\parks\compressed.park">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\parks\compressedback.park">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\parks\discovery-kingdom.park">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\parks\Parkitect_Pre-Alpha_6b.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\parks\test-pa9.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\parks\unnamed-park.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\scenario\qui-land.scenario">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
