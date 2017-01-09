@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkitectNexus.AssetMagic",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkitectNexus.AssetMagic.Debug", "src\ParkitectNexus.AssetMagic.Debug\ParkitectNexus.AssetMagic.Debug.csproj", "{EBD124FE-CAA2-4B5F-B6BD-378250D564AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkitectNexus.AssetMagic.Test", "src\ParkitectNexus.AssetMagic.Test\ParkitectNexus.AssetMagic.Test.csproj", "{A750FCAD-423F-4E79-9AD0-FE473F106386}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EBD124FE-CAA2-4B5F-B6BD-378250D564AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBD124FE-CAA2-4B5F-B6BD-378250D564AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBD124FE-CAA2-4B5F-B6BD-378250D564AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A750FCAD-423F-4E79-9AD0-FE473F106386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A750FCAD-423F-4E79-9AD0-FE473F106386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A750FCAD-423F-4E79-9AD0-FE473F106386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A750FCAD-423F-4E79-9AD0-FE473F106386}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
